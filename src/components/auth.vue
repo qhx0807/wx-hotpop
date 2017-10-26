@@ -1,18 +1,18 @@
 <template>
-  <van-button type="default">Default</van-button>
+    <van-button type="default">Default</van-button>
 </template>
 
 <script>
 export default {
     name: 'auth',
-    data () {
+    data() {
         return {
-        msg: 'Welcome'
+            msg: 'Welcome'
         }
     }
 }
 </script>
 
 <style lang="less" scoped>
-
+    
 </style>
