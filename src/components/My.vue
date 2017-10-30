@@ -3,9 +3,6 @@
         <div class="head-img">
             <van-swipe :autoplay="3000">
                 <van-swipe-item>
-                    <img src="../assets/s1.jpg"/>
-                </van-swipe-item>
-                <van-swipe-item>
                     <img src="../assets/s2.png"/>
                 </van-swipe-item>
                 <van-swipe-item>
@@ -13,6 +10,9 @@
                 </van-swipe-item>
                 <van-swipe-item>
                     <img src="../assets/s4.jpg"/>
+                </van-swipe-item>
+                <van-swipe-item>
+                    <img src="../assets/s1.jpg"/>
                 </van-swipe-item>
                 <van-swipe-item>
                     <img src="../assets/s5.jpg"/>
@@ -26,11 +26,11 @@
             </van-col>
             <van-col span="6">
                 <van-icon name="pending-orders" />
-                <p>待接单</p>
+                <p>已付款</p>
             </van-col>
             <van-col span="6">
                 <van-icon name="pending-deliver" />
-                <p>已发货</p>
+                <p>待发货</p>
             </van-col>
             <van-col span="6">
                 <van-icon name="logistics" />
