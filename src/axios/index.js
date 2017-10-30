@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-// const apiUrl = "https://bird.ioliu.cn/v1?url=http://39.108.15.145/parkingpay.ashx?"
+const apiUrl = "https://bird.ioliu.cn/v1?url=http://huoguo.cqjft.com/HotPot/TypeData?"
 
 // const apiUrl = "../parkingpay.ashx?"
 

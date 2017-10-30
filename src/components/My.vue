@@ -57,7 +57,7 @@
                         <span class="van-cell-text">我的优惠券</span>
                     </template>
                 </van-cell>
-                <van-cell title="收货地址薄" icon="location" is-link></van-cell>
+                <van-cell title="收货地址" @click.native="goMenu('addr')" icon="location" is-link></van-cell>
             </van-cell-group>
 
             <van-cell-group style="margin-top:10px">
@@ -66,13 +66,15 @@
         </div>
         
         <van-tabbar v-model="active">
-            <van-tabbar-item icon="shop">杨家酱小火锅</van-tabbar-item>
+            <van-tabbar-item icon="shop" @click.native="goList">杨家酱小火锅</van-tabbar-item>
             <van-tabbar-item icon="contact">个人中心</van-tabbar-item>
         </van-tabbar>
     </div>
 </template>
 
 <script>
+import { postApi } from '../axios'
+import { Toast } from 'vant'
 export default {
     name: 'my',
     data() {
@@ -81,6 +83,29 @@ export default {
             images:['../assets/y1.jpg'],
             active:1,
         }
+    },
+    created(){
+        this.getUserInfo()
+    },
+    methods:{
+        goList(){
+            this.$router.push({name: 'list'})
+        },
+        getUserInfo(){
+            let d = {
+                Type:'GetUser',
+                OpenID: localStorage.openid,
+            }
+            postApi(d, function (response) {
+                    console.log(response)
+                }.bind(this),function (error) {
+                
+                }.bind(this))
+        },
+        goMenu(e){
+            this.$router.push({name: e})
+        }
+
     }
 }
 </script>
