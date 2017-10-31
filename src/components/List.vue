@@ -245,7 +245,7 @@ export default {
             this.fee = 0;
         },
         goPostBall(){
-
+			
         },
     }
 }
