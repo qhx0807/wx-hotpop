@@ -7,6 +7,8 @@ const Addr = resolve => require(['@/components/Addr'], resolve)
 const AddrEdit = resolve => require(['@/components/AddrEdit'], resolve)
 const Confirm = resolve => require(['@/components/Confirm'], resolve)
 const AllOrder = resolve => require(['@/components/AllOrder'], resolve)
+const Memo = resolve => require(['@/components/Memo'], resolve)
+const Score = resolve => require(['@/components/Score'], resolve)
 
 
 Vue.use(Router)
@@ -41,6 +43,16 @@ export default new Router({
 					path: '/allorder',
 					name: 'allorder',
 					component: AllOrder
+				},
+				{
+					path: '/memo',
+					name: 'memo',
+					component: Memo
+				},
+				{
+					path: '/score',
+					name: 'score',
+					component: Score
 				},
 			],
 		}
