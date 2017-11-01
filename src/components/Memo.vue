@@ -25,12 +25,14 @@
             </van-field>
         </van-cell-group>
 		<div class="memo-footer">
-			<van-button size="large" type="primary">提交</van-button>
+			<van-button size="large" :loading="submitLoading" @click="submitMemo" type="primary">提交</van-button>
 		</div>
     </div>
 </template>
 
 <script>
+import { postApi } from '../axios'
+import { Toast } from 'vant'
 export default {
   	name: 'memo',
 	data() {
@@ -39,6 +41,7 @@ export default {
 				tel: '',
 				text: ''
 			},
+			submitLoading:false,
 			step:0,
 			lines:[
 				"rgba(0,222,255, 0.2)", 
@@ -81,7 +84,42 @@ export default {
 						window.setTimeout(callback, 1000 / 60); 
 					}; 
 			requestAnimFrame(this.loop);
-		}
+		},
+		submitMemo(){
+			if(this.msg.tel == '' || this.msg.tel == null){
+				Toast('请输入手机号')
+				return false
+			}else if(this.msg.text == '' || this.msg.text == null){
+				Toast('请输入留言内容')
+				return false
+			}
+			this.submitLoading = true
+			let d = {
+				Type:'Message',
+				Telephone: this.msg.tel,
+				Message: this.msg.text,
+			}
+			var t = this;
+			postApi(d, function(response){
+					console.log(response)
+					this.submitLoading = false
+					
+					if(response.data[0].OK){
+						Toast.success("提交成功")
+						setTimeout(function(){
+							t.$router.replace({name: 'my'})
+						},3000)
+					}else if(response.data.error){
+						Toast(response.data.error)
+					}else{
+						Toast(response.data)
+					}
+				}.bind(this),
+				function(error){
+					this.submitLoading = false
+					Toast('网络出错')
+				}.bind(this))
+		},
 	}
 }
 </script>

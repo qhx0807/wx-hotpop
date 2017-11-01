@@ -10,44 +10,25 @@
         </van-tabs>
         <div class="order-body">
             <van-pull-refresh class="con-list" v-model="isLoading">
-            <van-panel title="YJJHG20171031194509" status="状态" style="margin-bottom:12px">
+            <van-panel v-for="item in orderListData" :key="item.OrderID" :title="item.OrderNum" :status="item.PaymentStatus" style="margin-bottom:12px">
                 <div class="content">
-                   <div class="goods-item">
+                   <div class="goods-item" v-for="(n,index) in item.Data" :key="index">
                        <img src="http://os70o8m36.bkt.clouddn.com/share.bmp" alt="">
                         <div class="con-txt">
-                            <h5>标题</h5>
+                            <h5>{{n.Commodity}}</h5>
                             <p>描述描述描述描述描述描述描述描述描述描述描述描描述</p>
                             <p class="price"></p>
                         </div>
-                        <span class="one-price">￥34.00</span>
-                        <span class="one-num">x 2</span>
+                        <span class="one-price">￥{{n.Price}}</span>
+                        <span class="one-num">x {{n.CommodityNum}}</span>
                    </div>
-                   <div  class="goods-item">
-                       <img src="http://os70o8m36.bkt.clouddn.com/share.bmp" alt="">
-                        <div class="con-txt">
-                            <h5>标题</h5>
-                            <p>描述描述描述描述描述描述描述描述描述描述描述描描述</p>
-                            <p class="price"></p>
-                        </div>
-                        <span class="one-price">￥34.00</span>
-                        <span class="one-num">x 2</span>
-                   </div>
-                   <div  class="goods-item">
-                       <img src="http://os70o8m36.bkt.clouddn.com/share.bmp" alt="">
-                        <div class="con-txt">
-                            <h5>标题</h5>
-                            <p>描述描述描述描述描述描述描述描述描述描述描述描描述</p>
-                            <p class="price"></p>
-                        </div>
-                        <span class="one-price">￥34.00</span>
-                        <span class="one-num">x 2</span>
-                   </div>
+                   
                 </div>
                 <div slot="footer">
-                    <span>2017-10-31 18:21  共2件商品 合计：100.00元</span>
+                    <span>{{item.OrderTime}}&nbsp;&nbsp;&nbsp;共{{item.Data.length}}件商品 合计：{{item.PaymentAmount}}</span>
                 </div>
             </van-panel>
-        </van-pull-refresh>
+            </van-pull-refresh>
         </div>
 
     </div>
@@ -55,29 +36,67 @@
 
 <script>
 import { Toast } from 'vant'
+import { postApi } from '../axios'
 export default {
     name: "order",
     data() {
         return {
-            msg: "Welcome",
             isLoading: false,
             active:0,
+            orderListData:[],
+            searchKey:'',
         };
+    },
+    created(){
+        Toast.loading({
+            duration: 0,
+            forbidClick: true, 
+        })
+        this.getOrderList()
+    },
+    filters:{
+        filterBy:function(arr,search){
+            return "1"
+        }
     },
     watch: {
         isLoading() {
             if (this.isLoading) {
-                setTimeout(() => {
-                    Toast('刷新成功');
-                    this.isLoading = false;
-                    this.count++;
-                }, 500);
+                this.getOrderList()
             }
         }
     },
     methods:{
         onClickTab(e){
             //alert(e)
+        },
+        getOrderList(){
+            let d = {
+                Type:'OrderList',
+                OpenID:localStorage.openid,
+                OrderState:'',
+                PageIndex:'1',
+                PageSize:'100',
+            }
+            postApi(d, function (response) {
+					console.log(response)
+                    Toast.clear()
+                     this.isLoading = false;
+					if(response.data[0].TotalRecord){
+                        this.orderListData = response.data[0].OrderData
+                        if(this.isLoading){
+                            Toast('刷新成功')
+                        }
+					}else if(response.data.error){
+						Toast(response.data.error)
+					}else{
+						Toast(response.data)
+					}
+                }.bind(this),function (error) {
+                     this.isLoading = false;
+					 Toast("网络出错")
+					 Toast.clear()
+                }.bind(this))
         }
     }
 };
@@ -88,7 +107,7 @@ export default {
     height: 100%;
     position: relative;
     .tabs{
-        position: absolute;
+        position: fixed;
         top:0;
         left: 0;
         right: 0;

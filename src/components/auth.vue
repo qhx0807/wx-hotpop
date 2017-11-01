@@ -24,7 +24,7 @@ export default {
 	},
 	methods:{
 		getAuth(){
-			let code = 1
+			let code = this.getUrlParams('code')
 			let d = {
 				Type:'Type',
 				code: code,
@@ -51,10 +51,24 @@ export default {
 		getUserOpenid(){
 			let openid = localStorage.openid
 			if(openid){
-				//this.$router.replace({name: 'my'})
+				this.$router.replace({name: 'my'})
 				this.isLoading = false
 			}else{
 				this.getAuth()
+			}
+		},
+		getUrlParams(e){
+			let url = window.location.href
+			let a = url.split("?")[1]
+			let b = a.split("#")[0].split("&")
+			let code = b[0].split("=")[1]
+			let state = b[1].split("=")[1]
+			if(e==='code'){
+				return code
+			}else if(e==='state'){
+				return state
+			}else{
+				return ''
 			}
 		}
 	}
