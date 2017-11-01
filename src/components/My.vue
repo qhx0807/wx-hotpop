@@ -40,7 +40,7 @@
 
         <div class="my-links">
             <van-cell-group>
-                <van-cell icon="records" title="全部订单" is-link>
+                <van-cell icon="records" @click.native="goMenu('allorder')"  title="全部订单" is-link>
                 </van-cell>
             </van-cell-group>
 
@@ -50,7 +50,7 @@
             </van-cell-group>
 
             <van-cell-group style="margin-top:10px">
-                <van-cell title="我的积分" icon="exchange" is-link></van-cell>
+                <van-cell title="我的积分" @click.native="goMenu('score')"  icon="exchange" is-link></van-cell>
                 <van-cell title="我的优惠券" is-link value="">
                     <template slot="title">
                         <i class="iconfont icon-coupon my-icon"></i>
@@ -60,13 +60,13 @@
                 <van-cell title="收货地址" @click.native="goMenu('addr')" icon="location" is-link></van-cell>
             </van-cell-group>
 
-            <van-cell-group style="margin-top:10px">
-                <van-cell title="留言反馈" icon="chat" is-link></van-cell>
+            <van-cell-group style="margin-top:10px;">
+                <van-cell title="留言反馈" @click.native="goMenu('memo')"  icon="chat" is-link></van-cell>
             </van-cell-group>
         </div>
         
         <van-tabbar v-model="active">
-            <van-tabbar-item icon="shop" @click.native="goList">杨家酱小火锅</van-tabbar-item>
+            <van-tabbar-item icon="shop" @click.native="goList">热销商品</van-tabbar-item>
             <van-tabbar-item icon="contact">个人中心</van-tabbar-item>
         </van-tabbar>
     </div>
@@ -98,6 +98,7 @@ export default {
             }
             postApi(d, function (response) {
                     console.log(response)
+                   // localStorage.setItem("HeadImages", response.data.HeadImages)
                 }.bind(this),function (error) {
                 
                 }.bind(this))
@@ -113,11 +114,11 @@ export default {
 <style lang="less" scoped>
     .my{
         .head-img{
-            height: 240px;
+            height: 180px;
             width: 100%;
             background-color: #ffffff;
             img{
-                height: 240px;
+                height: 180px;
                 width: 100%;
             }
         }
@@ -143,7 +144,7 @@ export default {
             //color: red;
         }
         .my-links{
-            margin-bottom: 50px;
+            padding-bottom: 50px;
         }
     }
 </style>
