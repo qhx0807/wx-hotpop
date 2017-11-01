@@ -160,6 +160,7 @@ export default {
         this.carList.push(item)
       }
     },
+<<<<<<< HEAD
     subOfCar(item) {
       item.num -= 1
       this.buynum -= 1
@@ -246,6 +247,137 @@ export default {
     },
     goPostBall() {}
   }
+=======
+    methods:{
+        getCommodityList(){
+            let d = {
+                Type:'GetCommodity',
+                OpenID: localStorage.openid,
+                GroupID:'',
+            }
+            postApi(d, function(response){
+                    console.log(response)
+					if(response.data.length>=0){
+                        response.data.forEach(function (item) {
+	                    	item.num = 0;
+	                    })
+                        this.listData = response.data
+                        if(this.isLoading){
+                            Toast({
+                                duration: 1000,
+                                 message: '刷新成功'
+                            })
+                            this.isLoading = false
+                        }
+					}else if(response.data.error){
+                        Toast(response.data.error)
+                        this.isLoading = false
+					}
+				}.bind(this),
+				function(error){
+                    this.isLoading = false
+					console.log(error)
+				}.bind(this))
+        },
+        addToCar(item, e){
+            this.buynum += 1;
+            this.fee += parseFloat(item.Price);
+            this.ball_fly(e);
+            item.num += 1;
+            var i = this.carList.findIndex(function (li) {
+                return li.CommodityID == item.CommodityID
+            })
+            if(i>=0){
+
+            }else{
+                this.carList.push(item);
+            }
+        },
+        subOfCar(item){
+            item.num -= 1;
+            this.buynum -= 1;
+            this.fee -= parseFloat(item.Price);
+
+            var i = this.carList.findIndex(function (e) {
+                return e.CommodityID == item.CommodityID
+            })
+            if(i>=0 && item.num==0){
+                this.carList.splice(i,1);
+            }
+        },
+        clickCarLeft(){
+            if(this.carList.length>0){
+                this.carlistShow = !this.carlistShow;
+            }else{
+                return false;
+            }
+        },
+        ball_fly (e) {
+            // 被点元素位置
+            var bound = e.target.getBoundingClientRect();
+            var boundTop = bound.top;// 点击top值
+            var boundLeft = bound.left;// 点击left值
+            // 目标元素位置
+            var target = document.getElementById("car");
+            var targetData = target.getBoundingClientRect();
+            var targetTop = targetData.top;// 目标top值
+            var targetLeft = targetData.left;// 目标left值
+            // 创建父球（父球横向运动）
+            var father = document.createElement('div');
+            father.className = 'father flyball';
+            // 创建子球（子球垂直css3贝塞尔曲线运动，先上后下，得到抛球效果）
+            var child = document.createElement('div');
+            child.className = 'child inner';
+            father.appendChild(child);
+            // 设置父盒子生成的位置
+            father.style.top = boundTop + 'px';
+            father.style.left = boundLeft + 'px';
+            // append小球到页面中
+            document.getElementById("listWrap").appendChild(father);
+            //document.body.appendChild(father);
+            setTimeout(() => {
+            // 目标left - 所点元素left + 目标元素宽度的一半（修正落点）
+            father.style.transform = 'translate3d(' + (targetLeft - boundLeft + targetData.width / 2) + 'px, 0px, 0px)';
+            child.style.cssText = 'transform: translate3d(0px, ' + (targetTop - boundTop) + 'px, 0px);';
+            // 运动结束后删掉小球
+            setTimeout(() => {
+                // 移除小球
+               father.parentNode.removeChild(father);
+            }, 500);
+            }, 30);
+        },
+        carReduceItem(item, index){
+            this.buynum -= 1;
+            this.fee -= parseFloat(item.Price);
+            if(item.num>1){
+                item.num -= 1;
+            }else if(item.num==1){
+                item.num -= 1;
+                this.carList.splice(index,1);
+            }
+        },
+        carAddItem(item){
+            this.buynum += 1;
+            item.num += 1;
+            this.fee += parseFloat(item.Price);
+        },
+        seeHotDetail(item){
+            this.detailShow = true
+            this.detailData = item
+        },
+        clearCar(){
+            this.carList = [];
+            this.listData.forEach(function (item) {
+                item.num = 0;
+            })
+            this.buynum = 0;
+            this.fee = 0;
+        },
+        goPostBall(){
+			
+        },
+    }
+>>>>>>> 632416535444c5947715e1632dda6aa778cf643d
 }
 </script>
 
