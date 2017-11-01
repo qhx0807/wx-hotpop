@@ -35,6 +35,11 @@ export default new Router({
 					component: Addr
 				},
 				{
+					path: '/addredit',
+					name: 'addredit',
+					component: AddrEdit
+				},
+				{
 					path: '/confirm',
 					name: 'confirm',
 					component: Confirm
