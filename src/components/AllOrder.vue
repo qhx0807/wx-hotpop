@@ -1,6 +1,15 @@
 <template>
     <div class="order">
-        <van-pull-refresh v-model="isLoading">
+        <van-tabs class="tabs" @click="onClickTab">
+            <van-tab title="全部"></van-tab>
+            <van-tab title="待付款"></van-tab>
+            <van-tab title="已付款"></van-tab>
+            <van-tab title="未发货"></van-tab>
+            <van-tab title="已发货"></van-tab>
+            <van-tab title="已完成"></van-tab>
+        </van-tabs>
+        <div class="order-body">
+            <van-pull-refresh class="con-list" v-model="isLoading">
             <van-panel title="YJJHG20171031194509" status="状态" style="margin-bottom:12px">
                 <div class="content">
                    <div class="goods-item">
@@ -38,8 +47,8 @@
                     <span>2017-10-31 18:21  共2件商品 合计：100.00元</span>
                 </div>
             </van-panel>
-            
         </van-pull-refresh>
+        </div>
 
     </div>
 </template>
@@ -52,6 +61,7 @@ export default {
         return {
             msg: "Welcome",
             isLoading: false,
+            active:0,
         };
     },
     watch: {
@@ -64,6 +74,11 @@ export default {
                 }, 500);
             }
         }
+    },
+    methods:{
+        onClickTab(e){
+            //alert(e)
+        }
     }
 };
 </script>
@@ -71,6 +86,18 @@ export default {
 <style lang="less" >
 .order {
     height: 100%;
+    position: relative;
+    .tabs{
+        position: absolute;
+        top:0;
+        left: 0;
+        right: 0;
+        z-index: 99999;
+        box-shadow: 0 1px 2px 0px rgba(0, 0, 0, 0.1);
+    }
+    .order-body{
+        padding-top: 50px;
+    }
     .van-card {
         background-color: #ffffff;
     }

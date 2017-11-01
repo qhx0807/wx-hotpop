@@ -11,7 +11,7 @@ export default {
 </script>
 
 <style>
-@import url("//at.alicdn.com/t/font_456469_jnycso0dbh2gldi.css");
+@import url("//at.alicdn.com/t/font_456469_brvotownr2mon7b9.css");
 html,
 body {
 	height: 100%;
