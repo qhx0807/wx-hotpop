@@ -1,5 +1,5 @@
 <template>
-    <div class="auth">
+    <div class="loading">
         <div class="loading-div"></div>
         <p class="loading-text">玩命加载中...</p>
     </div>
@@ -7,7 +7,7 @@
 
 <script>
 export default {
-    name: "loading",
+    name: "Loading",
     data() {
         return {
             msg: "Welcome"
@@ -17,10 +17,9 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.auth {
-    height: 100%;
+.loading {
+    height:70px;
     width: 100%;
-    background-color: #ffffff;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -29,8 +28,8 @@ export default {
         font-size: 13px;
     }
     .loading-div {
-        width: 30px;
-        height: 30px;
+        width: 25px;
+        height: 25px;
         background-color: #424242;
         -webkit-animation: sk-rotatePlane 1.2s infinite ease-in-out;
         animation: sk-rotatePlane 1.2s infinite ease-in-out;

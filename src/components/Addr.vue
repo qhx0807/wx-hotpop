@@ -41,7 +41,8 @@ export default {
 			Toast('新增收货地址');
 		},
 		onEdit(item, index) {
-			Toast('编辑收货地址:' + index);
+			//Toast('编辑收货地址:' + index);
+			this.$router.push({name: 'addredit'})
 		}
 	}
 }
