@@ -8,12 +8,23 @@
 
 <script>
 export default {
-	name: "app"
+	name: "app",
+	data(){
+		return{
+
+		}
+	},
+	created(){
+
+	},
+	methods:{
+		
+	}
 };
 </script>
 
 <style>
-@import url("//at.alicdn.com/t/font_456469_brvotownr2mon7b9.css");
+@import url("//at.alicdn.com/t/font_456469_iys44f2f7oa5g66r.css");
 html,
 body {
 	height: 100%;
