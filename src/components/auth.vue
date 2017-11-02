@@ -51,7 +51,7 @@ export default {
 		getUserOpenid(){
 			let openid = localStorage.openid
 			if(openid){
-				this.$router.replace({name: 'my'})
+				//this.$router.replace({name: 'my'})
 				this.isLoading = false
 			}else{
 				this.getAuth()
