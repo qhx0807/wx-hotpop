@@ -16,7 +16,7 @@
 			<i class="van-contact-card__arrow van-icon van-icon-arrow"></i>
 		</div>
 
-		<van-card v-for="item in listData" :key="item.CommodityID" :title="item.Name" desc="商品描述商品描述商品描述商品描述商品描述商品描述商品描述" :num="item.num" :price="item.Price" thumb="http://os70o8m36.bkt.clouddn.com/share.bmp" centered>
+		<van-card v-for="item in carList" :key="item.CommodityID" :title="item.Name" desc="商品描述商品描述商品描述商品描述商品描述商品描述商品描述" :num="item.num" :price="item.Price" thumb="http://os70o8m36.bkt.clouddn.com/share.bmp" centered>
 		</van-card>
 		
 		<van-cell-group style="margin:10px 0;">
@@ -46,7 +46,7 @@ export default {
 		};
 	},
 	created() {
-		if(this.listData.length==0){
+		if(this.carList.length==0){
 			Toast("请选择商品")
 			this.$router.replace({name:'list'})
 			return false
@@ -66,10 +66,17 @@ export default {
 		...mapState([
 			'listData'
 		]),
+		carList(){
+			let arr = []
+			this.listData.forEach(item => {
+				if(item.num != 0) arr.push(item)
+			})
+			return arr
+		},
 		tips() {
-			if (this.listData.length >= 2) {
+			if (this.carList.length >= 2) {
 				return "您已享受满两件包邮优惠"
-			} else if (this.listData.length == 1) {
+			} else if (this.carList.length == 1) {
 				return "再购买一件商品即可享受包邮"
 			}
 		},
@@ -109,7 +116,7 @@ export default {
 		},
 		getOrderPrice(){
 			let commids = ''
-			this.listData.forEach(item => {
+			this.carList.forEach(item => {
 				commids += (item.CommodityID + ',' + item.num + ',')
 			})
 			let d = {
@@ -129,7 +136,7 @@ export default {
 		onClickAddOrder() {
 			this.isLoading = true
 			let commids = ''
-			this.listData.forEach(item => {
+			this.carList.forEach(item => {
 				commids += (item.CommodityID + ',' + item.num + ',')
 			})
 			let d = {

@@ -1,7 +1,7 @@
 <template>
     <div class="my">
         <div class="head-img">
-            <van-swipe :autoplay="3000">
+            <van-swipe :autoplay="3000" :showIndicators="false">
                 <van-swipe-item>
                     <img src="../assets/s2.png"/>
                 </van-swipe-item>
@@ -18,6 +18,9 @@
                     <img src="../assets/s5.jpg"/>
                 </van-swipe-item>
             </van-swipe>
+            <div class="head-tips">
+                {{userData.WeChatName}}，欢迎光临~
+            </div>
         </div>
         <van-row>
             <van-col span="6">
@@ -45,7 +48,13 @@
             </van-cell-group>
 
             <van-cell-group style="margin-top:10px">
-                <van-cell title="我的购物车" icon="shopping-cart" is-link></van-cell>
+                <van-cell  is-link @click="goMenu('sort')">
+                    <template slot="title">
+                        <i class="iconfont icon-leimupinleifenleileibie-- my-icon-sort"></i>
+                        <span class="van-cell-text">商品分类</span>
+                    </template>
+                </van-cell>
+                <!-- <van-cell title="我的购物车" icon="shopping-cart" is-link></van-cell> -->
                 <van-cell title="我的返现" icon="cash-back-record" is-link value=""></van-cell>
             </van-cell-group>
 
@@ -82,14 +91,20 @@ export default {
             msg: 'Welcome',
             images:['../assets/y1.jpg'],
             active:1,
+            userData:{
+                WeChatName:'亲爱的小伙伴'
+            },
         }
     },
     created(){
         this.getUserInfo()
     },
+    watch:{
+        
+    },
     methods:{
         goList(){
-            this.$router.push({name: 'list'})
+            this.$router.push({name:'list', params:{id: 'c6f8751a-8d69-4ab4-bdf6-620b5f90ec6b'}})
         },
         getUserInfo(){
             let d = {
@@ -97,7 +112,8 @@ export default {
                 OpenID: localStorage.openid,
             }
             postApi(d, function (response) {
-                    console.log(response)
+                    //console.log(response)
+                    //this.userData = response.data
                    // localStorage.setItem("HeadImages", response.data.HeadImages)
                 }.bind(this),function (error) {
                 
@@ -105,7 +121,10 @@ export default {
         },
         goMenu(e){
             this.$router.push({name: e})
-        }
+        },
+        goodsGroup(){
+             this.$router.push({name:'list', params:{id: 'c6f8751a-8d69-4ab4-bdf6-620b5f90ec6b'}})
+        },
 
     }
 }
@@ -117,15 +136,37 @@ export default {
             height: 180px;
             width: 100%;
             background-color: #ffffff;
+            position: relative;
             img{
                 height: 180px;
                 width: 100%;
+            }
+            .head-tips{
+                height: 30px;
+                position: absolute;
+                z-index: 9999;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                background-color: rgba(0, 0, 0, .5);
+                color: #fff;
+                font-size: 14px;
+                line-height: 30px;
+                padding-left: 15px;
+                letter-spacing: 1px;
             }
         }
         .my-icon{
             vertical-align: middle;
             height: 19px;
             line-height: 19px;
+        }
+        .my-icon-sort{
+            vertical-align: middle;
+            font-size: 14px;
+            height: 18px;
+            line-height: 18px;
+            margin-right: 3px;
         }
         .van-col{
             background-color: white;
