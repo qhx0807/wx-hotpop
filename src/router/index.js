@@ -36,56 +36,56 @@ export default new Router({
 			component: Auth,
 			children: [
 				{
-					path: '/my',
+					path: '/auth/my',
 					name: 'my',
 					component: My
 				},
 				{
-					path: '/addr',
+					path: '/auth/addr',
 					name: 'addr',
 					component: Addr
 				},
 				{
-					path: '/addredit',
+					path: '/auth/addredit',
 					name: 'addredit',
 					component: AddrEdit
 				},
 				{
-					path: '/confirm',
+					path: '/auth/confirm',
 					name: 'confirm',
 					component: Confirm
 				},
 				{
-					path: '/allorder',
+					path: '/auth/allorder/:t',
 					name: 'allorder',
 					component: AllOrder
 				},
 				{
-					path: '/memo',
+					path: '/auth/memo',
 					name: 'memo',
 					component: Memo
 				},
 				{
-					path: '/score',
+					path: '/auth/score',
 					name: 'score',
 					component: Score
 				},
 				{
-					path: '/sort',
+					path: '/auth/sort',
 					name: 'sort',
 					component: Sort
 				},
 				{
-					path: '/buy',
+					path: '/auth/buy',
 					component: Buy,
 					children:[
 						{
-							path: '/buy/list/:id',
+							path: '/auth/buy/list/:id',
 							name: 'list',
 							component: List
 						},
 						{
-							path: '/buy/detail',
+							path: '/auth/buy/detail',
 							name: 'detail',
 							component: Detail
 						}
