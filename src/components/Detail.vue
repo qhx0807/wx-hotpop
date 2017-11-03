@@ -46,12 +46,24 @@ export default {
         }
     },
     created(){
-        if(!this.detailObj.Name){
+
+    },
+    activated(){
+       if(!this.detailObj.Name){
             this.$router.replace({name:'list', params:{id: 'c6f8751a-8d69-4ab4-bdf6-620b5f90ec6b'}})
             return false
         }
         this.homeImgs = this.formatImgSrc(this.detailObj.HomeImage)
         this.conImgs = this.formatImgSrc(this.detailObj.ContentImage)
+    },
+    deactivated(){
+        
+    },
+    watch:{
+        "$route":function(to, from){
+            // alert(2)
+            // console.log(from)
+        }
     },
     computed:{
         ...mapState([
@@ -180,7 +192,7 @@ export default {
         line-height: 25px;
         padding: 0 10px;
         color: #666;
-        letter-spacing: 2px;
+        letter-spacing: 1px;
         margin-top: 5px;
     }
 }
