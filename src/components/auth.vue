@@ -4,7 +4,9 @@
 			<div class="loading-div"></div>
 			<p class="loading-text">玩命加载中...</p>
 		</div>
-		<router-view/>
+		<keep-alive>
+			<router-view></router-view>
+		</keep-alive>
 	</div>
 </template>
 
@@ -22,6 +24,11 @@ export default {
 	created () {
 		this.getUserOpenid()
 	},
+	watch:{
+        "$route":function(to, from){
+            
+        }
+    },
 	methods:{
 		getAuth(){
 			let code = this.getUrlParams('code')
