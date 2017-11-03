@@ -23,19 +23,19 @@
             </div>
         </div>
         <van-row>
-            <van-col span="6">
+            <van-col span="6" @click.native="goOrderList(1)">
                 <van-icon  name="pending-payment" />
                 <p>待付款</p>
             </van-col>
-            <van-col span="6">
+            <van-col span="6" @click.native="goOrderList(2)">
                 <van-icon name="pending-orders" />
                 <p>已付款</p>
             </van-col>
-            <van-col span="6">
+            <van-col span="6" @click.native="goOrderList(3)">
                 <van-icon name="pending-deliver" />
                 <p>待发货</p>
             </van-col>
-            <van-col span="6">
+            <van-col span="6" @click.native="goOrderList(4)">
                 <van-icon name="logistics" />
                 <p>已发货</p>
             </van-col>
@@ -43,7 +43,7 @@
 
         <div class="my-links">
             <van-cell-group>
-                <van-cell icon="records" @click.native="goMenu('allorder')"  title="全部订单" is-link>
+                <van-cell icon="records" @click.native="goOrderList(0)"  title="全部订单" is-link>
                 </van-cell>
             </van-cell-group>
 
@@ -99,6 +99,10 @@ export default {
     created(){
         this.getUserInfo()
     },
+    activated(){
+    },
+    deactivated(){
+    },
     watch:{
         
     },
@@ -125,6 +129,9 @@ export default {
         goodsGroup(){
              this.$router.push({name:'list', params:{id: 'c6f8751a-8d69-4ab4-bdf6-620b5f90ec6b'}})
         },
+        goOrderList(e){
+           this.$router.push({name:'allorder', params:{t: e}})
+        }
 
     }
 }

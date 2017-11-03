@@ -62,8 +62,7 @@ export default {
     },
     watch:{
         "$route":function(to, from){
-            //alert(1)
-            console.log(from)
+            
         }
     },
     computed:{

@@ -1,7 +1,7 @@
 import axios from 'axios'
 
-// const apiUrl = "https://bird.ioliu.cn/v1?url=http://huoguo.cqjft.com/HotPot/TypeData?"
-const apiUrl = "/HotPot/TypeData?"
+const apiUrl = "https://bird.ioliu.cn/v1?url=http://huoguo.cqjft.com/HotPot/TypeData?"
+// const apiUrl = "/HotPot/TypeData?"
 
 axios.interceptors.request.use(function(config){
     //在请求发出之前进行一些操作

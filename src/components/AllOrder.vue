@@ -10,7 +10,7 @@
         </van-tabs>
         <div class="order-body">
             <van-pull-refresh class="con-list" v-model="isLoading">
-            <van-panel v-for="item in orderListData" :key="item.OrderID" :title="item.OrderNum" :status="item.PaymentStatus" style="margin-bottom:12px">
+            <van-panel v-for="item in list" :key="item.OrderID" :title="item.OrderNum" :status="item.PaymentStatus" style="margin-bottom:12px">
                 <div class="content">
                    <div class="goods-item" v-for="(n,index) in item.Data" :key="index">
                        <img src="http://os70o8m36.bkt.clouddn.com/share.bmp" alt="">
@@ -42,9 +42,8 @@ export default {
     data() {
         return {
             isLoading: false,
-            active:0,
             orderListData:[],
-            searchKey:'',
+            list:[],
         };
     },
     created(){
@@ -53,6 +52,13 @@ export default {
             forbidClick: true, 
         })
         this.getOrderList()
+    },
+    activated(){
+        //alert(this.$route.params.t)
+        this.list = this.orderListData
+    },
+    deactivated(){
+        
     },
     filters:{
         filterBy:function(arr,search){
@@ -68,7 +74,7 @@ export default {
     },
     methods:{
         onClickTab(e){
-            //alert(e)
+            //this.$route.params.t = e
         },
         getOrderList(){
             let d = {
@@ -81,12 +87,13 @@ export default {
             postApi(d, function (response) {
 					console.log(response)
                     Toast.clear()
-                     this.isLoading = false;
+                     
 					if(response.data[0].TotalRecord){
                         this.orderListData = response.data[0].OrderData
                         if(this.isLoading){
                             Toast('刷新成功')
                         }
+                        this.isLoading = false
 					}else if(response.data.error){
 						Toast(response.data.error)
 					}else{
