@@ -32,6 +32,7 @@ export default {
 	methods:{
 		getAuth(){
 			let code = this.getUrlParams('code')
+			let state = this.getUrlParams('state')
 			let d = {
 				Type:'Type',
 				code: code,
@@ -40,11 +41,9 @@ export default {
 					console.log(response)
 					if(response.data.OpenID){
 						localStorage.setItem("openid", response.data.OpenID)
-						this.$router.replace({name: 'my'})
+						this.switchRouter(state)
 					}else if(response.data.error){
-						this.$router.replace({name: 'my'})
 						this.isLoading = false
-						localStorage.setItem("openid", "okSfhwRMarS1fmcrGzDWDjQNijGk")
 						Dialog.alert({
 							title: '提示',
 							message: response.data.error
@@ -56,9 +55,10 @@ export default {
 				}.bind(this))
 		},
 		getUserOpenid(){
+			let state = this.getUrlParams('state')
 			let openid = localStorage.openid
 			if(openid){
-				this.$router.replace({name: 'my'})
+				this.switchRouter(state)
 				this.isLoading = false
 			}else{
 				this.getAuth()
@@ -77,7 +77,21 @@ export default {
 			}else{
 				return ''
 			}
-		}
+		},
+		switchRouter(str){
+			switch (str) {
+				case 'STATE':
+					this.$router.replace({name: 'my'})
+					break;
+				case 'SORT':
+					this.$router.replace({name: 'sort'})
+					break;
+				default:
+					this.$router.replace({name: 'my'})
+					break;
+			}
+		},
+		
 	}
 };
 </script>

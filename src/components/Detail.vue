@@ -189,7 +189,7 @@ export default {
         margin: 0 6px;
     }
     i{
-        font-size: 18px;
+        font-size: 22px;
     }
 }
 .food-info{

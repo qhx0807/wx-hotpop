@@ -12,6 +12,7 @@ const Sort = resolve => require(['@/components/Sort'], resolve)
 const List = resolve => require(['@/components/List'], resolve)
 const Buy = resolve => require(['@/components/Buy'], resolve)
 const Detail = resolve => require(['@/components/Detail'], resolve)
+const Group = resolve => require(['@/components/Group'], resolve)
 
 // import Auth from '@/components/Auth'
 // import My from '@/components/My'
@@ -74,6 +75,11 @@ export default new Router({
 					path: '/auth/sort',
 					name: 'sort',
 					component: Sort
+				},
+				{
+					path: '/auth/group',
+					name: 'group',
+					component: Group
 				},
 				{
 					path: '/auth/buy',

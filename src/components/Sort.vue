@@ -27,6 +27,7 @@ export default {
 		return {
 			isLoading: false,
 			sortData: [],
+			sortUrl:'http://huoguo.cqjft.com/spxg.html?r=SORT',
 		}
 	},
 	components: {
@@ -62,12 +63,11 @@ export default {
 		wxConfigFoo(){
 			let ticket = localStorage.ticket
 			let timestamp = new Date().getTime().toString()
-			let url = window.location.href
+			let url = window.location.href.split('#')[0]
 			let noncestr = "Wm3WZYTPz0wzccnW"
 			
 			let str = "jsapi_ticket="+ticket+"&noncestr="+noncestr+"&timestamp="+timestamp+"&url="+url;
 			let signature = sha1(str)
-
 			wx.config({
 				debug: false, 
 				appId: 'wx3a1714f5b4c11978',
@@ -79,9 +79,9 @@ export default {
 
 			wx.ready(function(){
 				wx.onMenuShareTimeline({
-					title: "杨家酱小火锅商品详情",
+					title: "杨家酱小火锅",
 					desc:"随时随地，和你品尝舌尖上的重庆！",
-					link:'http://huoguo.cqjft.com/spxg.html',
+					link: 'http://huoguo.cqjft.com/new-share.html?r=SORT',
 					imgUrl: 'http://huoguo.cqjft.com/images/shareimg.bmp', 
 					success: function () { 
 						//getInfo('Type','ShareRecord','ActivityID',GetActivity.ActivityID);
@@ -92,9 +92,9 @@ export default {
 					}
 				});
 				wx.onMenuShareAppMessage({
-					title: "杨家酱小火锅商品详情",
+					title: "杨家酱小火锅",
 					desc:"随时随地，和你品尝舌尖上的重庆！",
-					link:'http://huoguo.cqjft.com/spxg.html',
+					link: 'http://huoguo.cqjft.com/new-share.html?r=SORT',
 					imgUrl: 'http://huoguo.cqjft.com/images/shareimg.bmp', 
 					success: function () { 
 						//getInfo('Type','ShareRecord','ActivityID',GetActivity.ActivityID);
