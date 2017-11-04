@@ -28,6 +28,11 @@
                     <span>{{item.OrderTime}}&nbsp;&nbsp;&nbsp;共{{item.Data.length}}件商品 合计：{{item.PaymentAmount}}</span>
                 </div>
             </van-panel>
+            <div class="none-div" v-show="list.length==0">
+                <h4>没有此类订单</h4>
+                <p>好东西，手慢无</p>
+                <button @click="goBuyList">去逛逛</button>
+            </div>
             </van-pull-refresh>
         </div>
 
@@ -160,6 +165,9 @@ export default {
                     break
             }
         },
+        goBuyList(){
+            this.$router.push({name:'list', params:{id: 'c6f8751a-8d69-4ab4-bdf6-620b5f90ec6b'}})
+        }
     }
 };
 </script>
@@ -244,6 +252,31 @@ export default {
             color: #666;
             font-size: 13px;
             max-height: 20px;
+        }
+    }
+    .none-div{
+        padding-top: 20px;
+        text-align: center;
+        color: #666;
+        h4{
+            font-weight: normal;
+            font-size: 16px;
+            margin:12px 0;
+        }
+        p{
+            font-size: 12px;
+            margin-top: 20px;
+            color: gray;
+        }
+        button{
+            outline: none;
+            border: 1px solid #FF6600;
+            background-color: #f8f8f8;
+            color: #f60;
+            font-size: 14px;
+            padding: 5px 28px;
+            margin-top: 15px;
+            border-radius: 4px;
         }
     }
 }
