@@ -5,7 +5,8 @@ Vue.use(Vuex)
 
 const state = {
 	listData: [],
-	detailObj:{},
+	detailObj: {},
+	order: [],
 }
 
 export default new Vuex.Store({
@@ -30,8 +31,12 @@ export default new Vuex.Store({
 			return false
 		},
 
-		UPDATE_dETAIL(state, obj){
+		UPDATE_dETAIL(state, obj) {
 			state.detailObj = obj
+		},
+
+		UPDATE_ORDER(state, data) {
+			state.order = data
 		}
 	}
 })
