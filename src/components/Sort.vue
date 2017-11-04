@@ -19,12 +19,14 @@
 import Loading from './common/Loading.vue'
 import { postApi } from '../axios'
 import { Toast } from 'vant'
+import wx from 'weixin-js-sdk'
+import sha1 from 'js-sha1'
 export default {
 	name: 'List',
 	data() {
 		return {
 			isLoading: false,
-			sortData: [{ "GroupID": "c6f8751a-8d69-4ab4-bdf6-620b5f90ec6b", "Name": "全部商品" }, { "GroupID": "2f277ec0-7ca3-488a-b1aa-de5fa9638637", "Name": "套餐" }, { "GroupID": "41fe93f0-92c0-423a-91c1-739d87d562e8", "Name": "嘴乐火锅" }, { "GroupID": "032b3264-1a5a-4839-bb87-18041cb92659", "Name": "杨家酱火锅" }, { "GroupID": "bfc7b5bb-9a51-4b22-942b-eae42b2eb92d", "Name": "卤家庄零食" }],
+			sortData: [],
 		}
 	},
 	components: {
@@ -32,6 +34,7 @@ export default {
 	},
 	created() {
 		this.getSortData()
+		this.wxConfigFoo()
 	},
 	methods: {
 		getSortData() {
@@ -55,7 +58,55 @@ export default {
 		},
 		onClickGroup(groupid){
 			this.$router.push({name:'list', params:{id: groupid}})
-		}
+		},
+		wxConfigFoo(){
+			let ticket = localStorage.ticket
+			let timestamp = new Date().getTime().toString()
+			let url = window.location.href
+			let noncestr = "Wm3WZYTPz0wzccnW"
+			
+			let str = "jsapi_ticket="+ticket+"&noncestr="+noncestr+"&timestamp="+timestamp+"&url="+url;
+			let signature = sha1(str)
+
+			wx.config({
+				debug: false, 
+				appId: 'wx3a1714f5b4c11978',
+				timestamp: timestamp,
+				nonceStr: noncestr,
+				signature: signature,
+				jsApiList: ['onMenuShareTimeline','onMenuShareAppMessage'],
+			});
+
+			wx.ready(function(){
+				wx.onMenuShareTimeline({
+					title: "杨家酱小火锅商品详情",
+					desc:"随时随地，和你品尝舌尖上的重庆！",
+					link:'http://huoguo.cqjft.com/spxg.html',
+					imgUrl: 'http://huoguo.cqjft.com/images/shareimg.bmp', 
+					success: function () { 
+						//getInfo('Type','ShareRecord','ActivityID',GetActivity.ActivityID);
+						alert("分享成功！");
+					},
+					cancel: function () {
+					// alert("取消")
+					}
+				});
+				wx.onMenuShareAppMessage({
+					title: "杨家酱小火锅商品详情",
+					desc:"随时随地，和你品尝舌尖上的重庆！",
+					link:'http://huoguo.cqjft.com/spxg.html',
+					imgUrl: 'http://huoguo.cqjft.com/images/shareimg.bmp', 
+					success: function () { 
+						//getInfo('Type','ShareRecord','ActivityID',GetActivity.ActivityID);
+						alert("分享成功！");
+					},
+					cancel: function () {
+					// alert("取消")
+					}
+				});
+
+			});
+		},
 	}
 }
 </script>

@@ -104,15 +104,16 @@ export default {
         }
     },
     created(){
-         Toast.loading({
+        Toast.loading({
             duration: 0,
             forbidClick: true, 
         })
         this.getUserInfo()
-        this.getOrderList()
+        this.getTokenTicket()
     },
     activated(){
         this.active = 1
+         this.getOrderList()
     },
     deactivated(){
     },
@@ -216,7 +217,7 @@ export default {
                 PageSize:'100',
             }
             postApi(d, function (response) {
-					console.log(response)
+					//console.log(response)
                     Toast.clear()
 					if(response.data[0].TotalRecord){
                         this.orderListData = response.data[0].OrderData
@@ -229,7 +230,25 @@ export default {
                 }.bind(this),function (error) {
 					 Toast.clear()
                 }.bind(this))
-        }
+        },
+        getTokenTicket(){
+            let d = {
+                Type:'Token'
+            }
+            postApi(d, function (response) {
+					//console.log(response)
+                    Toast.clear()
+					if(response.data.ticket){
+                        localStorage.setItem('ticket', response.data.ticket)
+					}else if(response.data.error){
+						Toast(response.data.error)
+					}else{
+						Toast(response.data)
+					}
+                }.bind(this),function (error) {
+					 Toast.clear()
+                }.bind(this))
+		},
 
     }
 }
