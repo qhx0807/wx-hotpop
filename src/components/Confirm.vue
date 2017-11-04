@@ -46,7 +46,10 @@ export default {
 		};
 	},
 	created() {
-		if(this.carList.length==0){
+		
+	},
+	activated(){
+        if(this.carList.length==0){
 			Toast("请选择商品")
 			this.$router.replace({name:'list'})
 			return false
@@ -57,8 +60,7 @@ export default {
 		})
 		this.getUserInfo()
 		this.getOrderPrice()
-		
-	},
+    },
 	watch:{
 		
 	},
@@ -99,7 +101,7 @@ export default {
                 OpenID: localStorage.openid,
             }
             postApi(d, function (response) {
-					console.log(response)
+					//console.log(response)
 					this.list.push({
 						id:1,
 						name: response.data.ReceiverName,
@@ -182,6 +184,7 @@ export default {
 	height: 100%;
 	overflow: auto;
 	padding-bottom: 88px;
+	box-sizing: border-box;
 	//background-color: #ffffff;
 }
 .van-card{
