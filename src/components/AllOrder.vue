@@ -1,6 +1,6 @@
 <template>
     <div class="order">
-        <van-tabs class="tabs" @click="onClickTab">
+        <van-tabs class="tabs" :active="activeTab"  @click="onClickTab">
             <van-tab title="全部"></van-tab>
             <van-tab title="待付款"></van-tab>
             <van-tab title="已付款"></van-tab>
@@ -44,26 +44,24 @@ export default {
             isLoading: false,
             orderListData:[],
             list:[],
+            activeTab:0,
         };
     },
     created(){
+        
+    },
+    activated(){
         Toast.loading({
             duration: 0,
             forbidClick: true, 
         })
         this.getOrderList()
-    },
-    activated(){
-        //alert(this.$route.params.t)
-        this.list = this.orderListData
+        this.activeTab = this.$route.params.t
+
+        
     },
     deactivated(){
         
-    },
-    filters:{
-        filterBy:function(arr,search){
-            return "1"
-        }
     },
     watch: {
         isLoading() {
@@ -72,9 +70,23 @@ export default {
             }
         }
     },
+    computed:{
+        all() {
+            let arr = [].concat(this.orderListData)
+            return arr
+        },
+        pendingPay(){
+            let arr = [].concat(this.orderListData)
+            let res = arr.filter(item => {
+                return item.PaymentStatus === '未支付'
+            })
+            return res
+        },
+    },
     methods:{
         onClickTab(e){
-            //this.$route.params.t = e
+            this.activeTab = e
+            this.getList(e)
         },
         getOrderList(){
             let d = {
@@ -87,9 +99,11 @@ export default {
             postApi(d, function (response) {
 					console.log(response)
                     Toast.clear()
-                     
+                    
 					if(response.data[0].TotalRecord){
                         this.orderListData = response.data[0].OrderData
+                        this.$store.commit('UPDATE_ORDER',response.data[0].OrderData)
+                        this.getList(this.activeTab)
                         if(this.isLoading){
                             Toast('刷新成功')
                         }
@@ -100,16 +114,57 @@ export default {
 						Toast(response.data)
 					}
                 }.bind(this),function (error) {
-                     this.isLoading = false;
-					 Toast("网络出错")
-					 Toast.clear()
+                     Toast.clear()
+                     this.isLoading = false
                 }.bind(this))
-        }
+        },
+        getList(e){
+            let arr = [].concat(this.orderListData)
+            switch (e) {
+                case 0://全部
+                    this.list = arr
+                    break
+                case 1://未支付
+                    let res1 = arr.filter(item => {
+                        return item.PaymentStatus === '未支付'
+                    })
+                    this.list = res1
+                    break
+                case 2://已支付
+                    let res2 = arr.filter(item => {
+                        return item.PaymentStatus === '已支付'
+                    })
+                    this.list = res2
+                    break
+                case 3://未发货
+                    let res3 = arr.filter(item => {
+                        return item.PaymentStatus === '已支付' && item.LogisticsStatus === '未发货'
+                    })
+                    this.list = res3
+                    console.log(res3)
+                    break
+                case 4://已发货
+                    let res4 = arr.filter(item => {
+                        return item.PaymentStatus === '已支付' && item.LogisticsStatus === '已发货'
+                    })
+                    this.list = res4
+                    break
+                case 5://已发货
+                    let res5 = arr.filter(item => {
+                        return item.OrderState === '已签收'
+                    })
+                    this.list = res5
+                    break
+                default:
+                    this.list = arr
+                    break
+            }
+        },
     }
 };
 </script>
 
-<style lang="less" >
+<style lang="less">
 .order {
     height: 100%;
     position: relative;
