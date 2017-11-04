@@ -1,41 +1,44 @@
 <template>
-    <div class="food">
-        <div class="food-content">
-            <div class="image-header">
-                <img :src="homeImgs[0]">
-                <div class="back" @click="goBack">
-                    <i class="iconfont icon-fanhui"></i>
+    <div class="detail">
+            <div class="food">
+                <div class="food-content">
+                    <div class="image-header">
+                        <img :src="homeImgs[0]">
+                        <div class="back" @click="goBack">
+                            <i class="iconfont icon-fanhui"></i>
+                        </div>
+                    </div>
+                    <div class="content">
+                        <h1 class="title">{{detailObj.Name}}</h1>
+                        <div class="detail">内容内容内容容内容内容内容内容容内容内容内容内容容内容</div>
+                        <div class="price">
+                            <span class="now">￥{{detailObj.Price}}</span>
+                        </div>
+                        <span class="detail-opt">
+                            <span v-show="detailObj.num>0">
+                                <i class="iconfont icon-jian" @click="subOfCarDetail(detailObj.CommodityID)"></i>
+                                <span class="num">{{detailObj.num}}</span>
+                            </span>
+                            <i class="iconfont icon-add" @click="addToCarDetail(detailObj.CommodityID)"></i>
+                        </span>
+                    </div>
+                    <div class="food-info">
+                        <p class="tit">商品信息</p>
+                        <p class="con">内容内容内容容内容内容内容内容内容内容容内容内容内容内容容内容内容内容内容容内容内容内容内容容内容内容内容内容容内容</p>
+                    </div>
+                    <div class="food-img">
+                        <img :src="conImgs[0]" alt="">
+                    </div>
                 </div>
+                
             </div>
-            <div class="content">
-                <h1 class="title">{{detailObj.Name}}</h1>
-                <div class="detail">内容内容内容容内容内容内容内容容内容内容内容内容容内容</div>
-                <div class="price">
-                    <span class="now">￥{{detailObj.Price}}</span>
-                </div>
-                <span class="detail-opt">
-                    <span v-show="detailObj.num>0">
-                        <i class="iconfont icon-jian" @click="subOfCar(detailObj)"></i>
-                        <span class="num">{{detailObj.num}}</span>
-                    </span>
-                    <i class="iconfont icon-add" @click="addToCar(detailObj.CommodityID)"></i>
-                </span>
-            </div>
-            <div class="food-info">
-                <p class="tit">商品信息</p>
-                <p class="con">内容内容内容容内容内容内容内容内容内容容内容内容内容内容容内容内容内容内容容内容内容内容内容容内容内容内容内容容内容</p>
-            </div>
-            <div class="food-img">
-                <img :src="conImgs[0]" alt="">
-            </div>
-        </div>
-        
     </div>
 </template>
 
 <script>
 import { Toast } from 'vant'
 import { mapState } from 'vuex'
+// import BScroll from 'better-scroll'
 export default {
     name: "detail",
     data() {
@@ -55,16 +58,28 @@ export default {
         }
         this.homeImgs = this.formatImgSrc(this.detailObj.HomeImage)
         this.conImgs = this.formatImgSrc(this.detailObj.ContentImage)
+
+        // const wrapper = document.querySelector('.food')
+		// this.$nextTick(function(){
+		// 	this.scroll = new BScroll(wrapper, {
+        //         startX: 0,
+        //         startY: 0,
+        //         click:true,
+        //         bounce: true,
+        //     })
+        //     console.log(this.scroll)
+        //     this.scroll.hasVerticalScroll = true
+		// })
     },
     deactivated(){
         
     },
-    watch:{
-        "$route":function(to, from){
-            // alert(2)
-            // console.log(from)
-        }
+    watch: {
+        
     },
+    mounted(){
+		
+	},
     computed:{
         ...mapState([
 			'detailObj'
@@ -78,8 +93,11 @@ export default {
             })
             return arr
         },
-        addToCar(id){
+        addToCarDetail(id){
             this.$store.commit('ADD_LIST_ITEM', id)
+        },
+        subOfCarDetail(id){
+            this.$store.commit('SUB_LIST_ITEM', id)
         },
         goBack(){
             this.$router.go(-1)
@@ -96,7 +114,6 @@ export default {
 }
 
 .food-content {
-    overflow: scroll;
     padding-bottom: 50px;
 }
 
