@@ -62,7 +62,10 @@ export default {
     },
     watch:{
         "$route":function(to, from){
-            
+			//console.log(from.name)
+			if(from.name=='sort' || from.name=='my'){
+				this.getCommodityList()
+			}
         }
     },
     computed:{
@@ -78,7 +81,7 @@ export default {
 				GroupID: this.$route.params.id,
 			}
 			postApi(d, function(response) {
-					console.log(response)
+					//console.log(response)
 					this.isLoading = false
 					if (response.data.length >= 0) {
 						response.data.forEach(function(item) {

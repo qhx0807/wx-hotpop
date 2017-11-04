@@ -24,20 +24,24 @@
         </div>
         <van-row>
             <van-col span="6" @click.native="goOrderList(1)">
-                <van-icon  name="pending-payment" />
-                <p>待付款</p>
+                <van-icon name="pending-payment" />
+                <p>待付款<span v-if="pendingPay>0">{{pendingPay}}</span></p>
             </van-col>
-            <van-col span="6" @click.native="goOrderList(2)">
+            <!-- <van-col span="6" @click.native="goOrderList(2)">
                 <van-icon name="pending-orders" />
-                <p>已付款</p>
-            </van-col>
+                <p>已付款<span>{{alreadyPay}}</span></p>
+            </van-col> -->
             <van-col span="6" @click.native="goOrderList(3)">
                 <van-icon name="pending-deliver" />
-                <p>待发货</p>
+                <p>待发货<span v-if="pendingSend>0">{{pendingSend}}</span></p>
             </van-col>
             <van-col span="6" @click.native="goOrderList(4)">
                 <van-icon name="logistics" />
-                <p>已发货</p>
+                <p>已发货<span v-if="alreadySend>0">{{alreadySend}}</span></p>
+            </van-col>
+            <van-col span="6" @click.native="goOrderList(5)">
+                <van-icon name="completed" />
+                <p>已完成</p>
             </van-col>
         </van-row>
 
@@ -84,6 +88,8 @@
 <script>
 import { postApi } from '../axios'
 import { Toast } from 'vant'
+import { mapState } from 'vuex'
+// import BScroll from 'better-scroll'
 export default {
     name: 'my',
     data() {
@@ -94,17 +100,86 @@ export default {
             userData:{
                 WeChatName:'亲爱的小伙伴'
             },
+            
         }
     },
     created(){
+         Toast.loading({
+            duration: 0,
+            forbidClick: true, 
+        })
         this.getUserInfo()
+        this.getOrderList()
     },
     activated(){
+        this.active = 1
     },
     deactivated(){
     },
     watch:{
         
+    },
+    mounted(){
+		// const wrapper = document.querySelector('.my')
+		// this.$nextTick(function(){
+		// 	this.scroll = new BScroll(wrapper, {
+        //         startX: 0,
+        //         startY: 0,
+        //         click:true,
+        //         bounce: true,
+        //     })
+		// })
+    },
+    computed:{
+        ...mapState([
+			'order'
+		]),
+        pendingPay(){
+            let num = 0
+            this.order.forEach(item => {
+                if(item.PaymentStatus === '未支付'){
+                    num += 1
+                }
+            })
+            return num
+            
+        },
+        alreadyPay(){
+            let num = 0
+            this.order.forEach(item => {
+                if(item.PaymentStatus === '已支付'){
+                    num += 1
+                }
+            })
+            return num
+        },
+        pendingSend(){
+            let num = 0
+            this.order.forEach(item => {
+                if(item.PaymentStatus === '已支付' && item.LogisticsStatus === '未发货'){
+                    num += 1
+                }
+            })
+            return num
+        },
+        alreadySend(){
+            let num = 0
+            this.order.forEach(item => {
+                if(item.PaymentStatus === '已支付' && item.LogisticsStatus === '已发货'){
+                    num += 1
+                }
+            })
+            return num
+        },
+        completed(){
+            let num = 0
+            this.order.forEach(item => {
+                if(item.OrderState === '已签收'){
+                    num += 1
+                }
+            })
+            return num
+        }
     },
     methods:{
         goList(){
@@ -131,6 +206,29 @@ export default {
         },
         goOrderList(e){
            this.$router.push({name:'allorder', params:{t: e}})
+        },
+        getOrderList(){
+            let d = {
+                Type:'OrderList',
+                OpenID:localStorage.openid,
+                OrderState:'',
+                PageIndex:'1',
+                PageSize:'100',
+            }
+            postApi(d, function (response) {
+					console.log(response)
+                    Toast.clear()
+					if(response.data[0].TotalRecord){
+                        this.orderListData = response.data[0].OrderData
+                        this.$store.commit('UPDATE_ORDER',response.data[0].OrderData)
+					}else if(response.data.error){
+						Toast(response.data.error)
+					}else{
+						Toast(response.data)
+					}
+                }.bind(this),function (error) {
+					 Toast.clear()
+                }.bind(this))
         }
 
     }
@@ -186,6 +284,22 @@ export default {
                 margin: 6px 0;
                 padding: 0;
                 font-size: 13px;
+                display: block;
+                position: relative;
+                span{
+                    display: block;
+                    position: absolute;
+                    top: -39px;
+                    left: 55%;
+                    height: 15px;
+                    width: 20px;
+                    line-height: 15px;
+                    font-size: 12px;
+                    text-align: center;
+                    border-radius: 40%;
+                    color: #fff;
+                    background-color: #f60;
+                }
             }
         }
         .van-tabbar-item--active {
