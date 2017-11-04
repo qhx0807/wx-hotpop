@@ -40,9 +40,9 @@ export default {
 				OpenID: localStorage.openid,
 			}
 			postApi(d, function(response) {
-				console.log(response)
+				//console.log(response)
 				this.isLoading = false
-				if (response.data.OK) {
+				if (response.data.length>0) {
 					this.sortData = response.data
 				} else if (response.data.error) {
 					Toast(response.data.error)
@@ -130,11 +130,11 @@ export default {
 				}
 			}
 			&.item-5 {
-				color: #b670bf;
-				border: 1px solid #b670bf;
+				color: red;
+				border: 1px solid red;
 				i {
-					border-top: 7px solid #b670bf;
-					border-left: 7px solid #b670bf;
+					border-top: 7px solid red;
+					border-left: 7px solid red;
 				}
 			}
 			&.item-6 {
