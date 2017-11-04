@@ -47,11 +47,13 @@
 <script>
 import { mapState } from 'vuex'
 import { Toast } from 'vant'
+// import BScroll from 'better-scroll'
 export default {
     name: "buy",
     data() {
         return {
-            carlistShow:false,
+			carlistShow:false,
+			scroll:null,
         };
     },
     created(){
@@ -67,6 +69,20 @@ export default {
             
         }
 	},
+	activated(){
+        const wrapper = document.querySelector('.buy')
+		// this.$nextTick(function(){
+		// 	this.scroll = new BScroll(wrapper, {
+        //         startX: 0,
+        //         startY: 0,
+        //         click:true,
+        //         bounce: true,
+		// 	})
+		// 	console.log(this.scroll)
+		// 	this.scroll.hasVerticalScroll = true
+		// })
+		
+    },
     computed:{
         ...mapState([
 			'listData'
@@ -131,9 +147,11 @@ export default {
 	padding: 0;
 	background-color: #f8f8f8;
 	height: 100%;
-	width: 100%;
-    position: relative;
-    overflow: auto;
+	width: 100%; 
+	-webkit-overflow-scrolling: touch;
+}
+.wrap.list-wrap{
+	height: 100%;
 }
 .shopcart {
 	position: fixed;
