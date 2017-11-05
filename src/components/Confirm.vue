@@ -18,11 +18,33 @@
 
 		<van-card v-for="item in carList" :key="item.CommodityID" :title="item.Name" desc="商品描述商品描述商品描述商品描述商品描述商品描述商品描述" :num="item.num" :price="item.Price" thumb="http://os70o8m36.bkt.clouddn.com/share.bmp" centered>
 		</van-card>
-		
-		<van-cell-group style="margin:10px 0;">
-			<van-field v-model="remarks" type="textarea" label="买家留言" placeholder="选填:对本次交易的说明"></van-field>
+		<van-cell-group>
+			<van-cell title="配送方式" >
+				<div class="send-fs">
+					<h4>{{psFs}}</h4>
+					<p>普通快递</p>
+				</div>	
+			</van-cell>
 		</van-cell-group>
-
+		<van-cell-group style="margin:10px 0;">
+			<van-field v-model="remarks" type="textarea" label="买家留言" autosize rows="1" placeholder="选填:对本次交易的说明"></van-field>
+		</van-cell-group>
+		<div class="ca-price">
+			<ul>
+				<li>
+					<span>商品金额</span>
+					<span class="money">&yen;{{goodsFee}}</span>
+				</li>
+				<li>
+					<span>运费</span>
+					<span class="money">+&yen;{{sendFee}}</span>
+				</li>
+				<li>
+					<span>优惠</span>
+					<span class="money">-&yen;0.00</span>
+				</li>
+			</ul>
+		</div>
 		<van-submit-bar :loading="isLoading" :price="totalPrice" button-text="提交订单" :tip="tips" @submit="onClickAddOrder" />
 		
 	</div>
@@ -82,17 +104,27 @@ export default {
 				return "再购买一件商品即可享受包邮"
 			}
 		},
-		// totalPrice(){
-		// 	let fee = 0
-		// 	this.listData.forEach(item => {
-		// 		fee += parseFloat(item.Price)
-		// 	})
-		// 	if(this.listData.length>=2){
-		// 		return fee*100
-		// 	}else{
-		// 		return (fee+6)*100
-		// 	}
-		// }
+		goodsFee(){
+			let fee = 0
+			this.carList.forEach(item => {
+				fee += parseFloat(item.Price)
+			})
+			return fee.toFixed(2)
+		},
+		sendFee(){
+			if (this.carList.length >= 2) {
+				return '0.00'
+			} else if (this.carList.length == 1) {
+				return "6.00"
+			}
+		},
+		psFs(){
+			if (this.carList.length >= 2) {
+				return '免运费'
+			} else if (this.carList.length == 1) {
+				return "运费￥6.00"
+			}
+		},
 	},
 	methods: {
 		getUserInfo(){
@@ -229,6 +261,42 @@ export default {
 		margin-top: 2px;
 		line-height: 20px;
 		font-size: 13px;
+	}
+}
+.van-card:not(:first-child) {
+    margin-top: 8px;
+}
+.send-fs{
+	h4{
+		margin: 0;
+		font-weight: normal;
+		color: #666;
+		font-size: 15px;
+		height: 20px;
+	}
+	p{
+		margin: 0;
+		color: #666;
+		font-size: 14px;
+		height: 20px;
+	}
+}
+.ca-price{
+	padding: 15px;
+	color: #666;
+	background-color: #fff;
+	font-size: 14px;
+	ul{
+		padding: 0;
+		li{
+			height: 26px;
+			line-height: 26px;
+		}
+	}
+	.money{
+		display: inline-block;
+		text-align: right;
+		float: right;
 	}
 }
 </style>
