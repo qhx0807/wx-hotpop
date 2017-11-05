@@ -13,6 +13,7 @@ const List = resolve => require(['@/components/List'], resolve)
 const Buy = resolve => require(['@/components/Buy'], resolve)
 const Detail = resolve => require(['@/components/Detail'], resolve)
 const Group = resolve => require(['@/components/Group'], resolve)
+const OrderInfo = resolve => require(['@/components/OrderInfo'], resolve)
 
 // import Auth from '@/components/Auth'
 // import My from '@/components/My'
@@ -60,6 +61,11 @@ export default new Router({
 					path: '/auth/allorder/:t',
 					name: 'allorder',
 					component: AllOrder
+				},
+				{
+					path: '/auth/orderinfo/:id',
+					name: 'orderinfo',
+					component: OrderInfo
 				},
 				{
 					path: '/auth/memo',

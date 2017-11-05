@@ -12,7 +12,7 @@
             <van-pull-refresh class="con-list" v-model="isLoading">
             <van-panel v-for="item in list" :key="item.OrderID" :title="item.OrderNum" :status="item.PaymentStatus" style="margin-bottom:12px">
                 <div class="content">
-                   <div class="goods-item" v-for="(n,index) in item.Data" :key="index">
+                   <div class="goods-item" @click="onClockOrder(item.OrderID)" v-for="(n,index) in item.Data" :key="index">
                        <img src="http://os70o8m36.bkt.clouddn.com/share.bmp" alt="">
                         <div class="con-txt">
                             <h5>{{n.Commodity}}</h5>
@@ -23,7 +23,7 @@
                         <span class="one-num">x {{n.CommodityNum}}</span>
                    </div>
                 </div>
-                <div slot="footer">
+                <div slot="footer" @click="onClockOrder(item.OrderID)">
                     <span>{{item.OrderTime}}&nbsp;&nbsp;&nbsp;共{{item.Data.length}}件商品 合计：<span class="totalFee">{{item.PaymentAmount}}</span><span>&nbsp;&nbsp;&nbsp;详情&gt;&gt;</span></span>
                 </div>
             </van-panel>
@@ -166,12 +166,16 @@ export default {
         },
         goBuyList(){
             this.$router.push({name:'list', params:{id: 'c6f8751a-8d69-4ab4-bdf6-620b5f90ec6b'}})
+        },
+        onClockOrder(id){
+            //alert(id)
+            this.$router.push({name:'orderinfo', params:{id: id}})
         }
     }
 };
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
 .order {
     height: 100%;
     position: relative;
