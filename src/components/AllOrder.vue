@@ -22,10 +22,9 @@
                         <span class="one-price">￥{{n.Price}}</span>
                         <span class="one-num">x {{n.CommodityNum}}</span>
                    </div>
-                   
                 </div>
                 <div slot="footer">
-                    <span>{{item.OrderTime}}&nbsp;&nbsp;&nbsp;共{{item.Data.length}}件商品 合计：{{item.PaymentAmount}}</span>
+                    <span>{{item.OrderTime}}&nbsp;&nbsp;&nbsp;共{{item.Data.length}}件商品 合计：<span class="totalFee">{{item.PaymentAmount}}</span><span>&nbsp;&nbsp;&nbsp;详情&gt;&gt;</span></span>
                 </div>
             </van-panel>
             <div class="none-div" v-show="list.length==0">
@@ -252,6 +251,12 @@ export default {
             color: #666;
             font-size: 13px;
             max-height: 20px;
+        }
+        .totalFee{
+            font-size: 14px;
+        }
+        p{
+            margin: 0;
         }
     }
     .none-div{
