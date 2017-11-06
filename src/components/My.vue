@@ -59,7 +59,8 @@
                     </template>
                 </van-cell> -->
                 <!-- <van-cell title="我的购物车" icon="shopping-cart" is-link></van-cell> -->
-                <!-- <van-cell title="我的返现" icon="cash-back-record" is-link value=""></van-cell> -->
+                <van-cell title="推广员中心" @click.native="goMenu('popucenter')" icon="exchange-record" is-link></van-cell>
+                <van-cell title="我的返现" icon="cash-back-record" is-link value=""></van-cell>
                 <!-- <van-cell title="推广员中心" icon="exchange-record" is-link value=""></van-cell> -->
             </van-cell-group>
 
@@ -71,6 +72,7 @@
                         <span class="van-cell-text">我的优惠券</span>
                     </template>
                 </van-cell> -->
+                
                 <van-cell title="收货地址" @click.native="goMenu('addr')" icon="location" is-link></van-cell>
             </van-cell-group>
 
