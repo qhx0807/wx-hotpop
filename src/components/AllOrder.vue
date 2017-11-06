@@ -7,6 +7,7 @@
             <van-tab title="未发货"></van-tab>
             <van-tab title="已发货"></van-tab>
             <van-tab title="已完成"></van-tab>
+            <van-tab title="已关闭"></van-tab>
         </van-tabs>
         <div class="order-body">
             <van-pull-refresh class="con-list" v-model="isLoading">
@@ -159,6 +160,12 @@ export default {
                         return item.OrderState === '已签收'
                     })
                     this.list = res5
+                    break
+                case 6://已发货
+                    let res6 = arr.filter(item => {
+                        return item.PaymentStatus === '已关闭'
+                    })
+                    this.list = res6
                     break
                 default:
                     this.list = arr
