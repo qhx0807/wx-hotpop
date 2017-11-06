@@ -79,16 +79,26 @@ export default {
 			}
 		},
 		switchRouter(str){
-			switch (str) {
-				case 'STATE':
-					this.$router.replace({name: 'my'})
-					break;
-				case 'SORT':
-					this.$router.replace({name: 'sort'})
-					break;
-				default:
-					this.$router.replace({name: 'my'})
-					break;
+			// switch (str) {
+			// 	case 'STATE':
+			// 		this.$router.replace({name: 'my'})
+			// 		break;
+			// 	case 'SORT':
+			// 		this.$router.replace({name: 'sort'})
+			// 		break;
+			// 	default:
+			// 		this.$router.replace({name: 'my'})
+			// 		break;
+			// }
+			let group = str.split('_')[1]
+			if(str == 'STATE'){
+				this.$router.replace({name: 'my'})
+			}else if(str == 'SORT'){
+				this.$router.replace({name: 'sort'})
+			}else if(group){
+				this.$router.replace({name:'list', params:{id: group}})
+			}else{
+				this.$router.replace({name: 'my'})
 			}
 		},
 		
