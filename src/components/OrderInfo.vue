@@ -84,7 +84,12 @@ export default {
 		padding-bottom: 50px;
 	}
 	.order-footer{
-		
+		position: fixed;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		height: 48px;
+		background-color: #ccc;
 	}
 }
 </style>
