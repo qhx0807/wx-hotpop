@@ -103,8 +103,8 @@
 			</van-pull-refresh>
 		</div>
 		<div class="order-footer">
-			<van-button size="mini">再来一单</van-button>
-			<van-button size="mini">我要晒订单</van-button>
+			<van-button size="mini" @click="oneMoreOrder">再来一单</van-button>
+			<van-button size="mini" @click="shareOrder">我要晒订单</van-button>
 		</div>
 	</div>
 </template>
@@ -210,7 +210,13 @@ export default {
 		},
 		titleImage(str){
             return 'http://huoguo.cqjft.com'+str.split(',')[0]
-        },
+		},
+		oneMoreOrder(){
+			this.$router.push({name:'list', params:{id: 'c6f8751a-8d69-4ab4-bdf6-620b5f90ec6b'}})
+		},
+		shareOrder(){
+			
+		}
 	},
 
 };
@@ -410,5 +416,6 @@ export default {
 }
 .van-button--mini{
 	padding: 0 10px;
+	width: auto;
 }
 </style>
