@@ -10,7 +10,7 @@
                     </div>
                     <div class="content">
                         <h1 class="title">{{detailObj.Name}}</h1>
-                        <div class="detail">内容内容内容容内容内容内容内容容内容内容内容内容容内容</div>
+                        <div class="detail">{{detailObj.Contents}}</div>
                         <div class="price">
                             <span class="now">￥{{detailObj.Price}}</span>
                         </div>
@@ -24,7 +24,7 @@
                     </div>
                     <div class="food-info">
                         <p class="tit">商品信息</p>
-                        <p class="con">内容内容内容容内容内容内容内容内容内容容内容内容内容内容容内容内容内容内容容内容内容内容内容容内容内容内容内容容内容</p>
+                        <p class="con">{{detailObj.Contents}}</p>
                     </div>
                     <div class="food-img">
                         <img :src="conImgs[0]" alt="">
