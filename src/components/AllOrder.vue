@@ -13,17 +13,17 @@
             <van-panel v-for="item in list" :key="item.OrderID" :title="item.OrderNum" :status="item.PaymentStatus" style="margin-bottom:12px">
                 <div class="content">
                    <div class="goods-item" @click="onClockOrder(item.OrderID)" v-for="(n,index) in item.Data" :key="index">
-                       <img src="http://os70o8m36.bkt.clouddn.com/share.bmp" alt="">
+                       <img :src="titleImage(n.TitleImage)" alt="">
                         <div class="con-txt">
                             <h5>{{n.Commodity}}</h5>
-                            <p>描述描述描述描述描述描述描述描述描述描述描述描描述</p>
+                            <p>{{n.Contents}}</p>
                             <p class="price"></p>
                         </div>
                         <span class="one-price">￥{{n.Price}}</span>
                         <span class="one-num">x {{n.CommodityNum}}</span>
                    </div>
                 </div>
-                <div slot="footer" @click="onClockOrder(item.OrderID)">
+                <div slot="footer" @click="onClockOrder(item.OrderID)" style="text-align:right">
                     <span>{{item.OrderTime}}&nbsp;&nbsp;&nbsp;共{{item.Data.length}}件商品 合计：<span class="totalFee">{{item.PaymentAmount}}</span><span>&nbsp;&nbsp;&nbsp;详情&gt;&gt;</span></span>
                 </div>
             </van-panel>
@@ -61,8 +61,6 @@ export default {
         })
         this.getOrderList()
         this.activeTab = this.$route.params.t
-
-        
     },
     deactivated(){
         
@@ -109,7 +107,10 @@ export default {
                         this.$store.commit('UPDATE_ORDER',response.data[0].OrderData)
                         this.getList(this.activeTab)
                         if(this.isLoading){
-                            Toast('刷新成功')
+                            Toast({
+                                duration:1000,
+                                message:'刷新成功',
+                            });
                         }
                         this.isLoading = false
 					}else if(response.data.error){
@@ -168,9 +169,11 @@ export default {
             this.$router.push({name:'list', params:{id: 'c6f8751a-8d69-4ab4-bdf6-620b5f90ec6b'}})
         },
         onClockOrder(id){
-            //alert(id)
             this.$router.push({name:'orderinfo', params:{id: id}})
-        }
+        },
+        titleImage(str){
+            return 'http://huoguo.cqjft.com'+str.split(',')[0]
+        },
     }
 };
 </script>

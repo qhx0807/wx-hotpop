@@ -16,7 +16,7 @@
 			<i class="van-contact-card__arrow van-icon van-icon-arrow"></i>
 		</div>
 
-		<van-card v-for="item in carList" :key="item.CommodityID" :title="item.Name" desc="商品描述商品描述商品描述商品描述商品描述商品描述商品描述" :num="item.num" :price="item.Price" thumb="http://os70o8m36.bkt.clouddn.com/share.bmp" centered>
+		<van-card v-for="item in carList" :key="item.CommodityID" :title="item.Name" :desc="item.Contents" :num="item.num" :price="item.Price" :thumb="titleImage(item.TitleImage)" centered>
 		</van-card>
 		<van-cell-group>
 			<van-cell title="配送方式" >
@@ -27,7 +27,7 @@
 			</van-cell>
 		</van-cell-group>
 		<van-cell-group style="margin:10px 0;">
-			<van-field v-model="remarks" type="textarea" label="买家留言" autosize rows="1" placeholder="选填:对本次交易的说明"></van-field>
+			<van-field v-model="remarks" type="textarea" label="买家留言" autosize rows="1" placeholder="(选填)对本次交易的说明"></van-field>
 		</van-cell-group>
 		<div class="ca-price">
 			<ul>
@@ -207,6 +207,9 @@ export default {
 					this.isLoading = false
                 }.bind(this))
 		},
+		titleImage(str){
+            return 'http://huoguo.cqjft.com'+str.split(',')[0]
+        },
 	}
 };
 </script>

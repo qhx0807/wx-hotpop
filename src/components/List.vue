@@ -9,7 +9,7 @@
 					</div>
 					<div class="content">
 						<h4>{{item.Name}}</h4>
-						<p>内容内容内容容内容内容内容内容容内容内容内容内容容内容</p>
+						<p>{{item.Contents}}</p>
 						<h3>￥{{item.Price}}</h3>
 					</div>
 					<span class="operator">
@@ -81,7 +81,7 @@ export default {
 				GroupID: this.$route.params.id,
 			}
 			postApi(d, function(response) {
-					//console.log(response)
+					console.log(response)
 					this.isLoading = false
 					if (response.data.length >= 0) {
 						response.data.forEach(function(item) {
