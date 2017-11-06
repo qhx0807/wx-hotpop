@@ -14,6 +14,7 @@ const Buy = resolve => require(['@/components/Buy'], resolve)
 const Detail = resolve => require(['@/components/Detail'], resolve)
 const Group = resolve => require(['@/components/Group'], resolve)
 const OrderInfo = resolve => require(['@/components/OrderInfo'], resolve)
+const PopuCenter = resolve => require(['@/components/PopuCenter'], resolve)
 
 // import Auth from '@/components/Auth'
 // import My from '@/components/My'
@@ -86,6 +87,11 @@ export default new Router({
 					path: '/auth/group',
 					name: 'group',
 					component: Group
+				},
+				{
+					path: '/auth/popucenter',
+					name: 'popucenter',
+					component: PopuCenter
 				},
 				{
 					path: '/auth/buy',
