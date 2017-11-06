@@ -52,24 +52,25 @@
             </van-cell-group>
 
             <van-cell-group style="margin-top:10px">
-                <van-cell  is-link @click="goMenu('sort')">
+                <!-- <van-cell  is-link @click="goMenu('sort')">
                     <template slot="title">
                         <i class="iconfont icon-leimupinleifenleileibie-- my-icon-sort"></i>
                         <span class="van-cell-text">商品分类</span>
                     </template>
-                </van-cell>
+                </van-cell> -->
                 <!-- <van-cell title="我的购物车" icon="shopping-cart" is-link></van-cell> -->
-                <van-cell title="我的返现" icon="cash-back-record" is-link value=""></van-cell>
+                <!-- <van-cell title="我的返现" icon="cash-back-record" is-link value=""></van-cell> -->
+                <!-- <van-cell title="推广员中心" icon="exchange-record" is-link value=""></van-cell> -->
             </van-cell-group>
 
             <van-cell-group style="margin-top:10px">
                 <van-cell title="我的积分" @click.native="goMenu('score')"  icon="exchange" is-link></van-cell>
-                <van-cell title="我的优惠券" is-link value="">
+                <!-- <van-cell title="我的优惠券" is-link value="">
                     <template slot="title">
                         <i class="iconfont icon-coupon my-icon"></i>
                         <span class="van-cell-text">我的优惠券</span>
                     </template>
-                </van-cell>
+                </van-cell> -->
                 <van-cell title="收货地址" @click.native="goMenu('addr')" icon="location" is-link></van-cell>
             </van-cell-group>
 
