@@ -56,8 +56,11 @@ export default {
         this.getUserInfo()
 	},
 	mounted(){
-		this.loop()
-	},
+		
+    },
+    activated(){
+        this.loop()
+    },
 	methods:{
 		loop(){
 			var canvas = document.getElementById('canvas')

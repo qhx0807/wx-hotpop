@@ -16,8 +16,8 @@
              <van-field v-model="addrData.ZipCode"  label="邮政编码"  placeholder="邮政编码(选填)"></van-field>
         </van-cell-group>
         <div class="btn-wrap">
-            <van-button type="default"  @click="goBack" style="width:100%" >返回</van-button>
-            <van-button type="primary" style="margin-top:12px;width:100%" :loading="submitLoading" @click="saveAddr" >保存</van-button>
+            <van-button type="primary" style="width:100%" :loading="submitLoading" @click="saveAddr" >保存</van-button>
+            <van-button type="default"  @click="goBack" style="margin-top:12px;width:100%" >返回</van-button>
         </div>
         <van-popup v-model="showSelectAddr" position="bottom">
             <van-area :area-list="areaList" @confirm="confirmAddr" @cancel="showSelectAddr=false"></van-area>
