@@ -183,7 +183,7 @@ export default {
     .con-footer{
         text-align:center;
         margin-top: 20px;
-        padding: 0 20px;
+        padding: 0 15px;
     }
     .con-footer-tip{
         margin-top:12px;

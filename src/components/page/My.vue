@@ -19,7 +19,7 @@
                 </van-swipe-item>
             </van-swipe>
             <div class="head-tips">
-                {{userData.WeChatName}}，欢迎光临~
+                {{WeChatName}}，欢迎光临~
             </div>
         </div>
         <van-row>
@@ -100,9 +100,7 @@ export default {
             msg: 'Welcome',
             images:['../../assets/y1.jpg'],
             active:1,
-            userData:{
-                WeChatName:'亲爱的小伙伴'
-            },
+            WeChatName:'亲爱的小伙伴',
             userData:{},
             
         }

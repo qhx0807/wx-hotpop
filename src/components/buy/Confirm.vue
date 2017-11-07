@@ -150,6 +150,7 @@ export default {
 		},
 		getOrderPrice(){
 			let commids = ''
+			this.isLoading = true
 			this.carList.forEach(item => {
 				commids += (item.CommodityID + ',' + item.num + ',')
 			})
@@ -163,8 +164,10 @@ export default {
 					let p = parseFloat(response.data.OrderPrice)*100
 					this.totalPrice = parseInt(p)
 					Toast.clear()
+					this.isLoading = false
                 }.bind(this),function (error) {
 					Toast("网络出错")
+					this.isLoading = false
                 }.bind(this))
 		},
 		onClickAddOrder() {
