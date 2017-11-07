@@ -30,10 +30,10 @@
                         <span class="van-cell-text">下级推广员</span>
                     </template>
                 </van-cell>
-                <van-cell title="下级推广订单" @click.native="goMenu('mysubuserorder')" is-link>
+                <van-cell title="下级推广提成" @click.native="goMenu('mysubuserorder')" is-link>
                     <template slot="title">
                         <i class="iconfont icon-tuiguang"></i>
-                        <span class="van-cell-text">下级推广订单</span>
+                        <span class="van-cell-text">下级推广提成</span>
                     </template>
                 </van-cell>
                 <van-cell title="提现记录" @click.native="goMenu('cashrecords')" icon="exchange" is-link ></van-cell>
@@ -59,6 +59,8 @@
 <script>
 import { postApi } from '../../axios'
 import { Toast } from 'vant'
+import wx from 'weixin-js-sdk'
+import sha1 from 'js-sha1'
 export default {
     name: "popucenter",
     data() {
@@ -78,7 +80,7 @@ export default {
     activated(){
         Toast.loading()
         this.getUserInfo()
-        
+        this.wxConfigFoo()
     },
     mounted(){
         
@@ -130,6 +132,53 @@ export default {
         },
         goMenu(e){
             this.$router.push({name: e})
+        },
+        wxConfigFoo(){
+			let ticket = localStorage.ticket
+			let timestamp = new Date().getTime().toString()
+			let url = window.location.href.split('#')[0]
+			let noncestr = "Wm3WZYTPz0wzccnW"
+			
+			let str = "jsapi_ticket="+ticket+"&noncestr="+noncestr+"&timestamp="+timestamp+"&url="+url;
+			let signature = sha1(str)
+			wx.config({
+				debug: false, 
+				appId: 'wx3a1714f5b4c11978',
+				timestamp: timestamp,
+				nonceStr: noncestr,
+				signature: signature,
+				jsApiList: ['onMenuShareTimeline','onMenuShareAppMessage'],
+			})
+
+			wx.ready(function(){
+				wx.onMenuShareTimeline({
+					title: "杨家酱小火锅",
+					desc:"随时随地，和你品尝舌尖上的重庆！",
+					link: 'http://huoguo.cqjft.com/share/new-share.html?r=groupid_c6f8751a-8d69-4ab4-bdf6-620b5f90ec6b',
+					imgUrl: 'http://huoguo.cqjft.com/images/shareimg.bmp', 
+					success: function () { 
+						//getInfo('Type','ShareRecord','ActivityID',GetActivity.ActivityID);
+						alert("分享成功！");
+					},
+					cancel: function () {
+					// alert("取消")
+					}
+				})
+				wx.onMenuShareAppMessage({
+					title: "杨家酱小火锅",
+					desc:"随时随地，和你品尝舌尖上的重庆！",
+					link: 'http://huoguo.cqjft.com/share/new-share.html?r=groupid_c6f8751a-8d69-4ab4-bdf6-620b5f90ec6b',
+					imgUrl: 'http://huoguo.cqjft.com/images/shareimg.bmp', 
+					success: function () { 
+						//getInfo('Type','ShareRecord','ActivityID',GetActivity.ActivityID);
+						alert("分享成功！");
+					},
+					cancel: function () {
+					// alert("取消")
+					}
+				})
+
+			})
         },
     }
 };
