@@ -3,19 +3,19 @@
         <div class="head-img">
             <van-swipe :autoplay="3000" :showIndicators="false">
                 <van-swipe-item>
-                    <img src="../assets/s2.png"/>
+                    <img src="../../assets/s2.png"/>
                 </van-swipe-item>
                 <van-swipe-item>
-                    <img src="../assets/s3.jpg"/>
+                    <img src="../../assets/s3.jpg"/>
                 </van-swipe-item>
                 <van-swipe-item>
-                    <img src="../assets/s4.jpg"/>
+                    <img src="../../assets/s4.jpg"/>
                 </van-swipe-item>
                 <van-swipe-item>
-                    <img src="../assets/s1.jpg"/>
+                    <img src="../../assets/s1.jpg"/>
                 </van-swipe-item>
                 <van-swipe-item>
-                    <img src="../assets/s5.jpg"/>
+                    <img src="../../assets/s5.jpg"/>
                 </van-swipe-item>
             </van-swipe>
             <div class="head-tips">
@@ -89,7 +89,7 @@
 </template>
 
 <script>
-import { postApi } from '../axios'
+import { postApi } from '../../axios'
 import { Toast } from 'vant'
 import { mapState } from 'vuex'
 // import BScroll from 'better-scroll'
@@ -98,7 +98,7 @@ export default {
     data() {
         return {
             msg: 'Welcome',
-            images:['../assets/y1.jpg'],
+            images:['../../assets/y1.jpg'],
             active:1,
             userData:{
                 WeChatName:'亲爱的小伙伴'

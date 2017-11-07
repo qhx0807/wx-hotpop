@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import { postApi } from '../axios'
+import { postApi } from '../../axios'
 import { Dialog } from 'vant'
 export default {
 	name: "auth",

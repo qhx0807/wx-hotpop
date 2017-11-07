@@ -2,7 +2,7 @@
 	<div class="wrap">
 		<Loading class="loading" v-if="isLoading"></Loading>
 		<div class="head-img">
-			<img src="../assets/s1.jpg" alt="">
+			<img src="../../assets/s1.jpg" alt="">
 		</div>
 		<div style="padding:0 30px;">
 			<van-row gutter="30">
@@ -16,8 +16,8 @@
 </template>
 
 <script>
-import Loading from './common/Loading.vue'
-import { postApi } from '../axios'
+import Loading from '../common/Loading.vue'
+import { postApi } from '../../axios'
 import { Toast } from 'vant'
 import wx from 'weixin-js-sdk'
 import sha1 from 'js-sha1'

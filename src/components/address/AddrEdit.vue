@@ -26,9 +26,9 @@
 </template>
 
 <script>
-import { postApi } from '../axios'
+import { postApi } from '../../axios'
 import { Toast } from 'vant'
-import AreaList from '../assets/area.json'
+import AreaList from '../../assets/area.json'
 export default {
     data() {
         return {

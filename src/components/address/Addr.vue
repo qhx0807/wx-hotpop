@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import { postApi } from '../axios'
+import { postApi } from '../../axios'
 import { Toast } from 'vant'
 export default {
 	data() {

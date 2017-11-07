@@ -51,7 +51,7 @@
 </template>
 
 <script>
-import { postApi } from '../axios'
+import { postApi } from '../../axios'
 import { Dialog } from 'vant'
 import { Toast } from 'vant'
 import { mapState } from 'vuex'

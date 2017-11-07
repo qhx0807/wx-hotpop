@@ -41,7 +41,7 @@
 
 <script>
 import { Toast } from 'vant'
-import { postApi } from '../axios'
+import { postApi } from '../../axios'
 export default {
     name: "order",
     data() {

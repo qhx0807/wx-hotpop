@@ -2,7 +2,7 @@
 	<div class="wrap">
 		<Loading class="loading" v-if="isLoading"></Loading>
 		<div class="all">
-            <img class="title" src="../assets/all.png" alt="">
+            <img class="title" src="../../assets/all.png" alt="">
             
         </div>
 		<div class="group-titlt">
@@ -13,8 +13,8 @@
 </template>
 
 <script>
-import Loading from './common/Loading.vue'
-import { postApi } from '../axios'
+import Loading from '../common/Loading.vue'
+import { postApi } from '../../axios'
 import { Toast } from 'vant'
 import wx from 'weixin-js-sdk'
 import sha1 from 'js-sha1'

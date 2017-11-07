@@ -27,8 +27,8 @@
 </template>
 
 <script>
-import Loading from './common/Loading.vue'
-import { postApi } from '../axios'
+import Loading from '../common/Loading.vue'
+import { postApi } from '../../axios'
 import { Toast } from 'vant'
 import { mapState } from 'vuex'
 export default {
