@@ -59,7 +59,7 @@
                     </template>
                 </van-cell> -->
                 <!-- <van-cell title="我的购物车" icon="shopping-cart" is-link></van-cell> -->
-                <van-cell title="推广员中心" @click.native="goMenu('popucenter')" icon="exchange-record" is-link></van-cell>
+                <van-cell title="推广员中心" @click.native="goPopu" icon="exchange-record" is-link></van-cell>
                 <van-cell title="我的返现" icon="cash-back-record" is-link value=""></van-cell>
                 <!-- <van-cell title="推广员中心" icon="exchange-record" is-link value=""></van-cell> -->
             </van-cell-group>
@@ -103,6 +103,7 @@ export default {
             userData:{
                 WeChatName:'亲爱的小伙伴'
             },
+            userData:{},
             
         }
     },
@@ -196,7 +197,7 @@ export default {
             }
             postApi(d, function (response) {
                     //console.log(response)
-                    //this.userData = response.data
+                    this.userData = response.data
                    // localStorage.setItem("HeadImages", response.data.HeadImages)
                 }.bind(this),function (error) {
                 
@@ -251,7 +252,14 @@ export default {
                 }.bind(this),function (error) {
 					 Toast.clear()
                 }.bind(this))
-		},
+        },
+        goPopu(){
+            if(this.userData.IsPopularize==1){
+                this.$router.push({name: 'popucenter'})
+            }else{
+                this.$router.push({name: 'popuuser'})
+            }
+        },
 
     }
 }
