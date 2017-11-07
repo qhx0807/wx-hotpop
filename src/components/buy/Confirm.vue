@@ -188,7 +188,7 @@ export default {
 				IntegralPrice:'',
 				Remarks: this.remarks,
 				Commodity:commids,
-				FatherOpenID:'',
+				FatherOpenID: sessionStorage.getItem('fatherid') || '',
 				OrderType:0,
 			}
 			postApi(d, function (response) {

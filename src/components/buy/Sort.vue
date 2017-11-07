@@ -75,7 +75,7 @@ export default {
 				nonceStr: noncestr,
 				signature: signature,
 				jsApiList: ['onMenuShareTimeline','onMenuShareAppMessage'],
-			});
+			})
 
 			wx.ready(function(){
 				wx.onMenuShareTimeline({
@@ -90,7 +90,7 @@ export default {
 					cancel: function () {
 					// alert("取消")
 					}
-				});
+				})
 				wx.onMenuShareAppMessage({
 					title: "杨家酱小火锅",
 					desc:"随时随地，和你品尝舌尖上的重庆！",
@@ -103,9 +103,9 @@ export default {
 					cancel: function () {
 					// alert("取消")
 					}
-				});
+				})
 
-			});
+			})
 		},
 	}
 }
