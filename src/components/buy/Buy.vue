@@ -13,7 +13,10 @@
 						</div>
 						<div class="num" v-show="buynum>0">{{buynum}}</div>
 					</div>
-					<div class="price highlight">￥{{fee}}</div>
+					<div class="price highlight">
+						<span v-show="!isLoading">￥{{totalPrice}}</span>
+						<van-loading  v-show="isLoading" type="circle" color="white"></van-loading>
+					</div>
 					<div class="desc">满两件商品免邮</div>
 				</div>
 				<div class="content-right">
@@ -45,30 +48,37 @@
 </template>
 
 <script>
+import { postApi } from '../../axios'
 import { mapState } from 'vuex'
 import { Toast } from 'vant'
 import wx from 'weixin-js-sdk'
 import sha1 from 'js-sha1'
-// import BScroll from 'better-scroll'
 export default {
     name: "buy",
     data() {
         return {
 			carlistShow:false,
-			scroll:null,
+			isLoading:false,
+			totalPrice:'0',
         };
     },
     created(){
 
     },
     watch: {
-		'carList.length': function(n, o) {
-			if (n == 0) {
+		'carList.length':function(n, o){
+			if(n == 0){
 				this.carlistShow = false
+				this.totalPrice = '0'
+			}else{
+				//console.log(1)
+				
+				
 			}
-        },
+		},
+		'carList':'getOrderPrice',
         "$route":function(to, from){
-            
+           // console.log(from)
         }
 	},
 	activated(){
@@ -102,7 +112,7 @@ export default {
             })
             return n
         }
-    },
+	},
     methods:{
         clickCarLeft() {
 			if (this.carList.length > 0) {
@@ -176,6 +186,37 @@ export default {
 
 			})
 		},
+		getOrderPrice(){
+			if(this.isLoading){
+				return false
+			}
+			if(this.carList.length==0){
+				this.totalPrice = '0'
+				return false
+			}
+			let commids = ''
+			this.isLoading = true
+			this.carList.forEach(item => {
+				commids += (item.CommodityID + ',' + item.num + ',')
+			})
+			let d = {
+				Type: 'GetOrderPrice',
+				OpenID: localStorage.openid,
+				Commodity: commids,
+				OrderType:0,
+			}
+			postApi(d, function (response) {
+					this.totalPrice = response.data.OrderPrice
+					Toast.clear()
+					this.isLoading = false
+                }.bind(this),function (error) {
+					Toast("网络出错")
+					this.isLoading = false
+                }.bind(this))
+		},
+		test(){
+			alert(1)
+		}
     }
 };
 </script>
