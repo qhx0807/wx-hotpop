@@ -147,10 +147,10 @@ export default {
 
 .list-ul li {
 	background-color: white;
-	height: 80px;
+	//height: 80px;
 	padding: 18px;
 	position: relative;
-	margin-bottom: 1px;
+	border-bottom: 1px solid #f8f8f8;
 }
 
 .list-ul li .icon {
