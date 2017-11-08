@@ -17,7 +17,7 @@
                        <img :src="titleImage(n.TitleImage)" alt="">
                         <div class="con-txt">
                             <h5>{{n.Commodity}}</h5>
-                            <p>{{n.Contents}}</p>
+                            <p>{{decodeURIComponent(n.Contents)}}</p>
                             <p class="price"></p>
                         </div>
                         <span class="one-price">￥{{n.Price}}</span>
@@ -238,6 +238,12 @@ export default {
                 font-weight: normal;
                 top: 10px;
                 padding-top: 10px;
+                padding-right: 50px;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                display: -webkit-box;
+                -webkit-line-clamp: 1;
+                -webkit-box-orient: vertical;
             }
             p{
                 padding-top: 12px;
