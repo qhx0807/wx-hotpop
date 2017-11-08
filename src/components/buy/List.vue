@@ -9,7 +9,7 @@
 					</div>
 					<div class="content">
 						<h4>{{item.Name}}</h4>
-						<p>{{item.Contents}}</p>
+						<p>{{ decodeURIComponent(item.Contents) }}</p>
 						<h3>￥{{item.Price}}</h3>
 					</div>
 					<span class="operator">

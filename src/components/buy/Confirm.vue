@@ -16,7 +16,7 @@
 			<i class="van-contact-card__arrow van-icon van-icon-arrow"></i>
 		</div>
 
-		<van-card v-for="item in carList" :key="item.CommodityID" :title="item.Name" :desc="item.Contents" :num="item.num" :price="item.Price" :thumb="titleImage(item.TitleImage)" centered>
+		<van-card v-for="item in carList" :key="item.CommodityID" :title="item.Name" :desc="decodeURIComponent(item.Contents)" :num="item.num" :price="item.Price" :thumb="titleImage(item.TitleImage)" centered>
 		</van-card>
 		<van-cell-group>
 			<van-cell title="配送方式" >
