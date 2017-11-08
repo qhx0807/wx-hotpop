@@ -22,6 +22,8 @@ const CashRecords = resolve => require(['@/components/popularize/CashRecords'], 
 const CashApply = resolve => require(['@/components/popularize/CashApply'], resolve)
 const SharePopu = resolve => require(['@/components/popularize/SharePopu'], resolve)
 const MySubUserOrder = resolve => require(['@/components/popularize/MySubUserOrder'], resolve)
+const RegPopu = resolve => require(['@/components/popularize/RegPopu'], resolve)
+const Tips = resolve => require(['@/components/popularize/Tips'], resolve)
 
 Vue.use(Router)
 
@@ -141,6 +143,16 @@ export default new Router({
 					path:'/auth/popushare',
 					name:'popushare',
 					component: SharePopu,
+				},
+				{
+					path:'/auth/regpopu',
+					name:'regpopu',
+					component: RegPopu,
+				},
+				{
+					path:'/auth/tips',
+					name:'tips',
+					component: Tips,
 				},
 			]
 		}

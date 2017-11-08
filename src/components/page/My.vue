@@ -255,7 +255,7 @@ export default {
             if(this.userData.IsPopularize==1){
                 this.$router.push({name: 'popucenter'})
             }else{
-                this.$router.push({name: 'popuuser'})
+                this.$router.push({name: 'regpopu'})
             }
         },
 
