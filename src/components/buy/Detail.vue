@@ -14,8 +14,12 @@
         <div class="food">
             <div class="food-content">
                 <div class="image-header">
-                    <img :src="homeImgs[0]">
-                    <div class="back" @click="goBack">
+                    <van-swipe :autoplay="3000">
+                        <van-swipe-item v-for="(item, index) in homeImgs" :key="index">
+                            <img class="swipe-img" :src="item"/>
+                        </van-swipe-item>
+                    </van-swipe>
+                    <div class="back" v-show="!isHeadShow" @click="goBack">
                         <i class="iconfont icon-fanhui"></i>
                     </div>
                 </div>
@@ -38,7 +42,7 @@
                     <p class="con">{{ decodeURIComponent(detailObj.Contents) }}</p>
                 </div>
                 <div class="food-img">
-                    <img :src="conImgs[0]" alt="">
+                    <img v-for="(item, index) in conImgs" :key="index" :src="item" alt="">
                 </div>
             </div>
             
@@ -133,7 +137,7 @@ export default {
 }
 .detail-head{
     height: 45px;
-    background-color: rgba(0, 0, 0, .5);
+    background-color: rgba(0, 0, 0, .7);
     position: fixed;
     top:0;
     left: 0;
@@ -171,22 +175,17 @@ export default {
 }
 
 .food-content {
-    padding-bottom: 50px;
+    padding-bottom: 48px;
 }
 
 .food .image-header {
-	position: relative;
 	width: 100%;
-	height: 0;
-	padding-top: 100%;
+	height: 310px;
 }
 
-.food .image-header img {
-	position: absolute;
-	top: 0;
-	left: 0;
+.swipe-img{
 	width: 100%;
-	height: 100%;
+	height: 310px;
 }
 
 .food .image-header .back {
@@ -199,7 +198,7 @@ export default {
 }
 
 .food .content {
-	position: relative;
+    position: relative;
 	padding: 18px;
 	background-color: #fff;
 }
