@@ -189,7 +189,7 @@ export default {
 	width: 100%; 
 	-webkit-overflow-scrolling: touch;
 }
-.wrap.list-wrap{
+.list-wrap{
 	height: 100%;
 }
 .shopcart {

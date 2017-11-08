@@ -1,37 +1,48 @@
 <template>
-    <div class="detail">
-            <div class="food">
-                <div class="food-content">
-                    <div class="image-header">
-                        <img :src="homeImgs[0]">
-                        <div class="back" @click="goBack">
-                            <i class="iconfont icon-fanhui"></i>
-                        </div>
-                    </div>
-                    <div class="content">
-                        <h1 class="title">{{detailObj.Name}}</h1>
-                        <div class="detail">{{detailObj.Contents}}</div>
-                        <div class="price">
-                            <span class="now">￥{{detailObj.Price}}</span>
-                        </div>
-                        <span class="detail-opt">
-                            <span v-show="detailObj.num>0">
-                                <i class="iconfont icon-jian" @click="subOfCarDetail(detailObj.CommodityID)"></i>
-                                <span class="num">{{detailObj.num}}</span>
-                            </span>
-                            <i class="iconfont icon-add" @click="addToCarDetail(detailObj.CommodityID)"></i>
-                        </span>
-                    </div>
-                    <div class="food-info">
-                        <p class="tit">商品信息</p>
-                        <p class="con">{{detailObj.Contents}}</p>
-                    </div>
-                    <div class="food-img">
-                        <img :src="conImgs[0]" alt="">
+    <div class="detail" @scroll="watchScroll">
+        <div class="detail-head" v-show="isHeadShow">
+            <i class="iconfont icon-fanhui" @click="goBack"></i>
+            <span class="name">{{detailObj.Name}} <span style="font-size:12px;">￥{{detailObj.Price}}</span></span>
+            <span class="detail-opt-head">
+                <span v-show="detailObj.num>0">
+                    <i class="iconfont icon-jian" @click="subOfCarDetail(detailObj.CommodityID)"></i>
+                    <span class="num">{{detailObj.num}}</span>
+                </span>
+                <i class="iconfont icon-add" @click="addToCarDetail(detailObj.CommodityID)"></i>
+            </span>
+        </div>
+        <div class="food">
+            <div class="food-content">
+                <div class="image-header">
+                    <img :src="homeImgs[0]">
+                    <div class="back" @click="goBack">
+                        <i class="iconfont icon-fanhui"></i>
                     </div>
                 </div>
-                
+                <div class="content">
+                    <h1 class="title">{{detailObj.Name}}</h1>
+                    <div class="detail">{{detailObj.Parameter}}</div>
+                    <div class="price">
+                        <span class="now">￥{{detailObj.Price}}</span>
+                    </div>
+                    <span class="detail-opt">
+                        <span v-show="detailObj.num>0">
+                            <i class="iconfont icon-jian" @click="subOfCarDetail(detailObj.CommodityID)"></i>
+                            <span class="num">{{detailObj.num}}</span>
+                        </span>
+                        <i class="iconfont icon-add" @click="addToCarDetail(detailObj.CommodityID)"></i>
+                    </span>
+                </div>
+                <div class="food-info">
+                    <p class="tit">商品信息</p>
+                    <p class="con">{{ decodeURIComponent(detailObj.Contents) }}</p>
+                </div>
+                <div class="food-img">
+                    <img :src="conImgs[0]" alt="">
+                </div>
             </div>
+            
+        </div>
     </div>
 </template>
 
@@ -46,6 +57,7 @@ export default {
             host:'http://huoguo.cqjft.com',
             homeImgs:[],
             conImgs:[],
+            isHeadShow:false,
         }
     },
     created(){
@@ -78,7 +90,7 @@ export default {
         
     },
     mounted(){
-		
+		this.watchScroll()
 	},
     computed:{
         ...mapState([
@@ -101,16 +113,61 @@ export default {
         },
         goBack(){
             this.$router.go(-1)
+        },
+        watchScroll(e){
+            if(e.target.scrollTop>=480){
+                this.isHeadShow = true
+            }else{
+                 this.isHeadShow = false
+            }
         }
     },
 };
 </script>
 
 <style lang="less" scoped>
-.food {
-	width: 100%;
-	background: #f8f8f8;
+.detail{
+    height: 100%;
 	overflow: auto;
+    
+}
+.detail-head{
+    height: 45px;
+    background-color: rgba(0, 0, 0, .5);
+    position: fixed;
+    top:0;
+    left: 0;
+    right: 0;
+    z-index: 99;
+    color: #fff;
+    .icon-fanhui{
+        height: 18px;
+        width: 18px;
+        position: absolute;
+        top: 13px;
+        left: 5px;
+        font-weight: 600;
+    }
+    .name{
+        margin-left: 40px;
+        padding-top: 12px;
+        font-size: 14px;
+        display: inline-block;
+    }
+    .detail-opt-head{
+        display: inline-block;
+        float: right;
+        margin-right: 10px;
+        margin-top: 12px;
+        i{
+            font-size: 22px;
+            margin: 0 12px;
+        }
+    }
+}
+.food {
+    width: 100%;
+	background: #f8f8f8;
 }
 
 .food-content {
