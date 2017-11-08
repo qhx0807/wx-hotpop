@@ -97,6 +97,14 @@ export default {
 				this.$router.replace({name: 'sort'})
 			}else if(group){
 				this.$router.replace({name:'list', params:{id: group}})
+			}else if(str == 'ORDER'){
+				this.$router.replace({name:'allorder', params:{t: '0'}})
+			}else if(str == 'MESSAGE'){
+				this.$router.replace({name:'memo'})
+			}else if(str == 'POPU'){
+				this.$router.replace({name:'popucenter'})
+			}else if(str == 'LIST'){
+				this.$router.replace({name:'list', params:{id: 'c6f8751a-8d69-4ab4-bdf6-620b5f90ec6b'}})
 			}else{
 				this.$router.replace({name: 'my'})
 			}
