@@ -1,7 +1,7 @@
 <template>
     <div class="my">
         <div class="head-img">
-            <van-swipe :autoplay="3000" :showIndicators="false">
+            <!-- <van-swipe :autoplay="3000" :showIndicators="false">
                 <van-swipe-item>
                     <img src="../../assets/s2.png"/>
                 </van-swipe-item>
@@ -17,7 +17,9 @@
                 <van-swipe-item>
                     <img src="../../assets/s5.jpg"/>
                 </van-swipe-item>
-            </van-swipe>
+            </van-swipe> -->
+            <canvas id="canvasC"></canvas>
+            <img class="logo" src="../../assets/yyy.jpg"/>
             <div class="head-tips">
                 {{WeChatName}}，欢迎光临~
             </div>
@@ -102,6 +104,12 @@ export default {
             active:1,
             WeChatName:'亲爱的小伙伴',
             userData:{},
+            step:0,
+            lines:[
+                "rgba(255,65,1, 0.6)", 
+                "rgba(255,65,1, 0.4)",
+                "rgba(255,65,1, 0.1)", 
+            ],
             
         }
     },
@@ -114,13 +122,17 @@ export default {
         this.getTokenTicket()
     },
     activated(){
+        this.loop()
         this.active = 1
-         this.getOrderList()
+        this.getOrderList()
+        
     },
     deactivated(){
     },
     watch:{
-        
+       "$route":function(to, from){
+           
+        } 
     },
     mounted(){
 		// const wrapper = document.querySelector('.my')
@@ -258,6 +270,34 @@ export default {
                 this.$router.push({name: 'regpopu'})
             }
         },
+        loop(){
+			var canvas = document.getElementById('canvasC')
+			var ctx = canvas.getContext('2d')
+			var boHeight = canvas.height / 6
+			var posHeight = canvas.height / 1.8
+			ctx.clearRect(0,0,canvas.width,canvas.height); 
+			var t = this;
+			this.step ++
+			for(var j = t.lines.length - 1; j >= 0; j--) { 
+				ctx.fillStyle = t.lines[j]; 
+				//每个矩形的角度都不同，每个之间相差45度 
+				var angle = (t.step+j*70)*Math.PI/180; 
+				var deltaHeight = Math.sin(angle) * boHeight;
+				var deltaHeightRight = Math.cos(angle) * boHeight; 
+				ctx.beginPath();
+				ctx.moveTo(0, posHeight+deltaHeight); 
+				ctx.bezierCurveTo(canvas.width/2, posHeight+deltaHeight-boHeight, canvas.width / 2, posHeight+deltaHeightRight-boHeight, canvas.width, posHeight+deltaHeightRight); 
+				ctx.lineTo(canvas.width, canvas.height); 
+				ctx.lineTo(0, canvas.height); 
+				ctx.lineTo(0, posHeight+deltaHeight); 
+				ctx.closePath(); 
+				ctx.fill(); 
+			}
+			var requestAnimFrame = 	window.requestAnimationFrame  || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || function( callback ){ 
+						window.setTimeout(callback, 1000 / 60); 
+					}; 
+			requestAnimFrame(this.loop);
+        },
 
     }
 }
@@ -270,9 +310,23 @@ export default {
             width: 100%;
             background-color: #ffffff;
             position: relative;
-            img{
+            canvas{
+                background-color: #FAB48B;
                 height: 180px;
                 width: 100%;
+            }
+            // img{
+            //     height: 180px;
+            //     width: 100%;
+            // }
+            .logo{
+                height: 110px;
+                width: 140px;
+                position: absolute;
+                top: 20px;
+                left: 50%;
+                margin-left: -70px;
+                border-radius: 14px;
             }
             .head-tips{
                 height: 30px;
@@ -335,6 +389,11 @@ export default {
         }
         .my-links{
             padding-bottom: 50px;
+        }
+        .test{
+            color: rgba(0,168,255, 0.6);
+            color:  rgba(0,168,255, 0.4);
+            color:  orangered 
         }
     }
 </style>

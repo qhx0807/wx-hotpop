@@ -124,6 +124,8 @@ export default {
                     this.userInfo = response.data
                     if(response.data.IsPopularize==1){
                         this.loop()
+                    }else{
+                        this.$router.replace({name:'regpopu'})
                     }
                     Toast.clear()
                 }.bind(this),function (error) {

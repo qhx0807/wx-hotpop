@@ -154,6 +154,31 @@ export default {
 				}
 			}
 		}
-	}
+    }
+    .none-div{
+        padding-top: 20px;
+        text-align: center;
+        color: #666;
+        h4{
+            font-weight: normal;
+            font-size: 16px;
+            margin:12px 0;
+        }
+        p{
+            font-size: 12px;
+            margin-top: 20px;
+            color: gray;
+        }
+        button{
+            outline: none;
+            border: 1px solid #FF6600;
+            background-color: #f8f8f8;
+            color: #f60;
+            font-size: 14px;
+            padding: 5px 28px;
+            margin-top: 15px;
+            border-radius: 4px;
+        }
+    }
 }
 </style>
