@@ -32,7 +32,7 @@
 					<ul>
 						<li v-for="item in carList" :key="item.CommodityID" class="food">
 							{{item.Name}}
-							<span class="carlist-price">￥{{item.num*parseFloat(item.Price)}}</span>
+							<span class="carlist-price">￥{{ (item.num*parseFloat(item.Price)).toFixed(2)}}</span>
 							<span class="carlist-opt">
 								<i class="iconfont icon-jian" @click="carReduceItem(item.CommodityID)"></i>
 								<span class="num">{{item.num}}</span>

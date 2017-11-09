@@ -106,6 +106,9 @@
 			<van-button size="mini" @click="oneMoreOrder">再来一单</van-button>
 			<van-button size="mini" @click="shareOrder">我要晒订单</van-button>
 		</div>
+		<div class="share-guide" v-show="shareGuideShow" @click="shareOrder">
+			<img src="../../assets/share.png" alt="">
+		</div>
 	</div>
 </template>
 
@@ -119,6 +122,8 @@ export default {
 			isLoading: false,
 			orderDetail:{},
 			remarks:'',
+			shareGuideShow:false,
+			
 		}
 	},
 	created() {
@@ -215,7 +220,7 @@ export default {
 			this.$router.push({name:'list', params:{id: 'c6f8751a-8d69-4ab4-bdf6-620b5f90ec6b'}})
 		},
 		shareOrder(){
-			
+			this.shareGuideShow = !this.shareGuideShow
 		}
 	},
 
@@ -252,6 +257,19 @@ export default {
 		line-height: 38px;
 		padding-right: 20px;
 		border-top: 1px solid #eee;
+	}
+}
+.share-guide{
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: rgba(0, 0, 0, .7);
+	z-index: 999999;
+	img{
+		width: 90%;
+		float: right;
 	}
 }
 .van-card{

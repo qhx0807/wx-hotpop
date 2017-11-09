@@ -62,8 +62,8 @@ export default {
     },
     watch:{
         "$route":function(to, from){
-			//console.log(from.name)
-			if(from.name=='sort' || from.name=='my' || from.name=='allorder'){
+			console.log(from.name)
+			if(from.name=='sort' || from.name=='my' || from.name=='allorder' || from.name=='orderinfo'){
 				this.getCommodityList()
 			}
         }
