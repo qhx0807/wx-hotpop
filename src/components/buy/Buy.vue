@@ -390,18 +390,19 @@ export default {
 }
 
 .shopcart .shopcart-list .list-content {
-	padding: 0 18px;
-	max-height: 217px;
+	padding: 0 10px;
+	max-height: 260px;
 	overflow: scroll;
 	background: #fff;
 	padding-bottom: 14px;
 }
 
 .shopcart .shopcart-list .list-content .food {
-	padding: 12px 0;
+	padding: 14px 0;
 	box-sizing: border-box;
 	position: relative;
-	font-size: 14px;
+	font-size: 12px;
+	border-bottom: 1px solid #f8f8f8;
 }
 .list-mask {
 	position: fixed;
@@ -429,7 +430,7 @@ export default {
 	color: #00a0dc;
     font-size: 14px;
     span{
-        margin: 0 6px;
+        margin: 0 5px;
     }
     i{
         font-size: 18px;
@@ -438,7 +439,7 @@ export default {
 
 .carlist-price {
 	float: right;
-	margin-right: 100px;
+	margin-right: 80px;
 	color: #f01414;
 }
 
