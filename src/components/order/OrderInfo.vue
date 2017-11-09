@@ -137,6 +137,7 @@ export default {
 		}
 	},
 	activated() {
+		Toast.loading()
 		this.getOrderDetails()
 		
 	},
@@ -194,6 +195,7 @@ export default {
             }
             postApi(d, function (response) {
 				console.log(response)
+				Toast.clear()
 				if(response.data[0]){
 					this.orderDetail = response.data[0]
 					this.remarks = decodeURI(response.data[0].Remarks) || '无'
@@ -210,6 +212,7 @@ export default {
 				}
 				this.isLoading = false;
 			}.bind(this),function (error) {
+				Toast.clear()
 				this.isLoading = false;
 			}.bind(this))
 		},
