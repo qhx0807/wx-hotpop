@@ -75,6 +75,7 @@ export default {
     },
 	methods: {
 		getCommodityList() {
+			this.isLoading = true
 			let d = {
 				Type: 'GetCommodity',
 				OpenID: localStorage.openid,
