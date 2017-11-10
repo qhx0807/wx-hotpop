@@ -9,7 +9,7 @@
 					</div>
 					<div class="content">
 						<h4>{{item.Name}}</h4>
-						<p>{{ decodeURIComponent(item.Contents) }}</p>
+						<p>{{ decodeURIComponent(item.Parameter) }}</p>
 						<h3>￥{{item.Price}}</h3>
 					</div>
 					<span class="operator">
@@ -48,17 +48,14 @@ export default {
     },
     
 	created() {
-        console.log(1)
+        
         this.getCommodityList()
     },
     mounted(){
-        console.log(2)
+        
     },
     activated(){
-       console.log(3)
-    },
-    deactivated(){
-        console.log(4)
+       
     },
     watch:{
         "$route":function(to, from){
