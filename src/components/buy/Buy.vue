@@ -17,7 +17,9 @@
 						<span v-show="!isLoading">￥{{totalPrice}}</span>
 						<van-loading  v-show="isLoading" type="circle" color="white"></van-loading>
 					</div>
-					<div class="desc">满两件商品免邮</div>
+					<div class="desc">
+						<span v-show="isFreeSendShow">已享受包邮</span>
+					</div>
 				</div>
 				<div class="content-right">
 					<div class="pay not-enough" :class="{enough:carList.length>0}" @click="goPostBall">去结算</div>
@@ -60,6 +62,7 @@ export default {
 			carlistShow:false,
 			isLoading:false,
 			totalPrice:'0',
+			isFreeSend:'',
         };
     },
     created(){
@@ -111,7 +114,14 @@ export default {
                 n += item.num
             })
             return n
-        }
+		},
+		isFreeSendShow:function(){
+			if(this.isFreeSend=='True' && this.carList.length>0){
+				return true
+			}else{
+				return false
+			}
+		}
 	},
     methods:{
         clickCarLeft() {
@@ -206,7 +216,8 @@ export default {
 				OrderType:0,
 			}
 			postApi(d, function (response) {
-					//console.log(response)
+					console.log(response)
+					this.isFreeSend = response.data[1].IsSend
 					this.totalPrice = response.data[0].OrderPrice
 					Toast.clear()
 					this.isLoading = false
