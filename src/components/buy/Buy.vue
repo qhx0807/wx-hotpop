@@ -206,7 +206,8 @@ export default {
 				OrderType:0,
 			}
 			postApi(d, function (response) {
-					this.totalPrice = response.data.OrderPrice
+					//console.log(response)
+					this.totalPrice = response.data[0].OrderPrice
 					Toast.clear()
 					this.isLoading = false
                 }.bind(this),function (error) {
