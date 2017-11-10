@@ -34,16 +34,17 @@ export default {
 			let code = this.getUrlParams('code')
 			let state = this.getUrlParams('state')
 			let d = {
-				Type:'Type',
+				Type:'Login',
 				code: code,
+				FatherOpenID: sessionStorage.fatherid || '',
 			}
 			postApi(d, function(response){
 					console.log(response)
+					this.isLoading = false
 					if(response.data.OpenID){
 						localStorage.setItem("openid", response.data.OpenID)
 						this.switchRouter(state)
 					}else if(response.data.error){
-						this.isLoading = false
 						Dialog.alert({
 							title: '提示',
 							message: response.data.error
@@ -52,6 +53,7 @@ export default {
 				}.bind(this),
 				function(error){
 					console.log(error)
+					this.isLoading = false
 				}.bind(this))
 		},
 		getUserOpenid(){
