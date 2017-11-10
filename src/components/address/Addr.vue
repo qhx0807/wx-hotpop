@@ -1,7 +1,7 @@
 <template>
 	<div class="addr">
 		<div class="title">收货地址列表</div>
-		<van-address-list v-model="chosenAddressId" :list="list" @add="onAdd" @edit="onEdit" />
+		<van-address-list v-model="chosenAddressId" addButtonText="编辑收货地址" :list="list" @add="onAdd" @edit="onEdit" />
 	</div>
 </template>
 
@@ -38,7 +38,7 @@ export default {
                 }.bind(this))
         },
 		onAdd() {
-			Toast('新增收货地址');
+			this.$router.push({name: 'addredit'})
 		},
 		onEdit(item, index) {
 			this.$router.push({name: 'addredit'})
