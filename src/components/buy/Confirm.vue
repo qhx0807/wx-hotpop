@@ -16,7 +16,7 @@
 			<i class="van-contact-card__arrow van-icon van-icon-arrow"></i>
 		</div>
 
-		<van-card v-for="item in carList" :key="item.CommodityID" :title="item.Name" :desc="decodeURIComponent(item.Contents)" :num="item.num" :price="item.Price" :thumb="titleImage(item.TitleImage)" centered>
+		<van-card v-for="item in carList" :key="item.CommodityID" :title="item.Name" :desc="decodeURIComponent(item.Parameter)" :num="item.num" :price="item.Price" :thumb="titleImage(item.TitleImage)" centered>
 		</van-card>
 		<van-cell-group>
 			<van-cell title="配送方式" >
@@ -65,6 +65,8 @@ export default {
 			totalPrice:0,
 			addrInfo:{},
 			remarks:'',
+			isFreeSend:'',
+			tips:'',
 		};
 	},
 	created() {
@@ -97,13 +99,13 @@ export default {
 			})
 			return arr
 		},
-		tips() {
-			if (this.carList.length >= 2) {
-				return "您已享受满两件包邮优惠"
-			} else if (this.carList.length == 1) {
-				return "再购买一件商品即可享受包邮"
-			}
-		},
+		// tips() {
+		// 	if (this.carList.length >= 2) {
+		// 		return "您已享受满两件包邮优惠"
+		// 	} else if (this.carList.length == 1) {
+		// 		return "再购买一件商品即可享受包邮"
+		// 	}
+		// },
 		goodsFee(){
 			let fee = 0
 			this.carList.forEach(item => {
@@ -161,7 +163,14 @@ export default {
 				OrderType:0,
 			}
 			postApi(d, function (response) {
-					let p = parseFloat(response.data.OrderPrice)*100
+					this.isFreeSend = response.data[1].IsSend
+					if(response.data[1].IsSend == 'False'){
+						this.tips = '再购买一件商品即可享受包邮'
+					}else{
+						this.tips = '您已享受包邮优惠'
+					}
+
+					let p = parseFloat(response.data[0].OrderPrice)*100
 					this.totalPrice = parseInt(p)
 					Toast.clear()
 					this.isLoading = false
