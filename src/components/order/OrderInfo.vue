@@ -37,7 +37,7 @@
 					<i class="van-contact-card__arrow van-icon van-icon-arrow"></i>
 				</div>
 				
-				<van-panel title="杨家酱小火锅" :status="orderDetail.PaymentStatus" style="margin-bottom:-1px;margin-top:8px" >
+				<van-panel title="食尝享念" :status="orderDetail.PaymentStatus" style="margin-bottom:-1px;margin-top:8px" >
 					<div class="content">
 						<div class="goods-item" v-for="(n,index) in orderDetail.Data" :key="index">
 							<img :src="titleImage(n.TitleImage)" alt="">
