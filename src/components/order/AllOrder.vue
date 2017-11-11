@@ -17,7 +17,7 @@
                        <img :src="titleImage(n.TitleImage)" alt="">
                         <div class="con-txt">
                             <h5>{{n.Commodity}}</h5>
-                            <p>{{decodeURIComponent(n.Contents)}}</p>
+                            <p>{{decodeURIComponent(n.Parameter)}}</p>
                             <p class="price"></p>
                         </div>
                         <span class="one-price">￥{{n.Price}}</span>
