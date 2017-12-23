@@ -24,6 +24,7 @@ const SharePopu = resolve => require(['@/components/popularize/SharePopu'], reso
 const MySubUserOrder = resolve => require(['@/components/popularize/MySubUserOrder'], resolve)
 const RegPopu = resolve => require(['@/components/popularize/RegPopu'], resolve)
 const Tips = resolve => require(['@/components/popularize/Tips'], resolve)
+const Activiity = resolve => require(['@/components/activity/activity'], resolve)
 
 Vue.use(Router)
 
@@ -153,6 +154,11 @@ export default new Router({
 					path:'/auth/tips',
 					name:'tips',
 					component: Tips,
+				},
+				{
+					path:'/auth/activiity',
+					name:'activiity',
+					component: Activiity,
 				},
 			]
 		}
