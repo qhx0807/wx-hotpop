@@ -52,7 +52,6 @@ export default {
 					link: 'http://huoguo.cqjft.com/share/new-share.html?r=groupid_c6f8751a-8d69-4ab4-bdf6-620b5f90ec6b',
 					imgUrl: 'http://huoguo.cqjft.com/images/shareimg.bmp', 
 					success: function () { 
-						//getInfo('Type','ShareRecord','ActivityID',GetActivity.ActivityID);
 						alert("分享成功！");
 					},
 					cancel: function () {
@@ -65,7 +64,6 @@ export default {
 					link: 'http://huoguo.cqjft.com/share/new-share.html?r=groupid_c6f8751a-8d69-4ab4-bdf6-620b5f90ec6b',
 					imgUrl: 'http://huoguo.cqjft.com/images/shareimg.bmp', 
 					success: function () { 
-						//getInfo('Type','ShareRecord','ActivityID',GetActivity.ActivityID);
 						alert("分享成功！");
 					},
 					cancel: function () {
