@@ -8,11 +8,18 @@
 export default {
     data () {
         return {
-            
+            codeUrl:'http://qrcode.shuogesha.com/qrcode?pixel=270_250&content=',
+            qrcodeCon:'http://huoguo.cqjft.com/share/new-share.html?fatherid=',
+            fatherid:'',
         }
     },
     created () {
         
+    },
+     activated(){
+        this.fatherid = localStorage.openid
+        this.qrcodeCon = 'http://huoguo.cqjft.com/share/new-share.html?fatherid='+ localStorage.openid
+        this.wxConfigFoo()
     },
     methods: {
         wxConfigFoo(){
