@@ -61,8 +61,15 @@
                     </template>
                 </van-cell> -->
                 <!-- <van-cell title="我的购物车" icon="shopping-cart" is-link></van-cell> -->
+                <van-cell title="喜迎双旦" is-link  @click.native="goMenu('activiity')" >
+                    <template slot="title">
+                        <img class="hot-img" src="../../assets/hot.gif" alt="">
+                        <span class="van-cell-text">圣诞活动</span>
+                    </template>
+                    <span class="active-slot">限时优惠</span>
+                </van-cell>
                 <van-cell title="推广员中心" @click.native="goPopu" icon="exchange-record" is-link></van-cell>
-                <van-cell title="我的返现" icon="cash-back-record" is-link value=""></van-cell>
+                <!-- <van-cell title="我的返现" icon="cash-back-record" is-link value=""></van-cell> -->
                 <!-- <van-cell title="推广员中心" icon="exchange-record" is-link value=""></van-cell> -->
             </van-cell-group>
 
@@ -237,9 +244,9 @@ export default {
                         this.orderListData = response.data[0].OrderData
                         this.$store.commit('UPDATE_ORDER',response.data[0].OrderData)
 					}else if(response.data.error){
-						Toast(response.data.error)
+						// Toast(response.data.error)
 					}else{
-						Toast(response.data)
+						// Toast(response.data)
 					}
                 }.bind(this),function (error) {
 					 Toast.clear()
@@ -255,9 +262,9 @@ export default {
 					if(response.data.ticket){
                         localStorage.setItem('ticket', response.data.ticket)
 					}else if(response.data.error){
-						Toast(response.data.error)
+						//Toast(response.data.error)
 					}else{
-						Toast(response.data)
+						//Toast(response.data)
 					}
                 }.bind(this),function (error) {
 					 Toast.clear()
@@ -394,6 +401,13 @@ export default {
             color: rgba(0,168,255, 0.6);
             color:  rgba(0,168,255, 0.4);
             color:  orangered 
+        }
+        .hot-img{
+            vertical-align: middle;
+        }
+        .active-slot{
+            font-size: 13px;
+            color: #999;
         }
     }
 </style>
