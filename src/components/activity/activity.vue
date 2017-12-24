@@ -1,6 +1,6 @@
 <template>
   <div class="act">
-    <img class="hedimg" src="../../assets/act1.png" alt="">
+    <!-- <img class="hedimg" src="../../assets/act1.png" alt=""> -->
   </div>
 </template>
 
