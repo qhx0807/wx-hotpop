@@ -5,6 +5,8 @@
 </template>
 
 <script>
+import wx from 'weixin-js-sdk'
+import sha1 from 'js-sha1'
 export default {
     data () {
         return {
