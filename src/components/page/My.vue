@@ -61,10 +61,10 @@
                     </template>
                 </van-cell> -->
                 <!-- <van-cell title="我的购物车" icon="shopping-cart" is-link></van-cell> -->
-                <van-cell title="喜迎双旦" is-link  @click.native="goMenu('activiity')" >
+                <van-cell is-link  @click.native="goMenu('activiity')" >
                     <template slot="title">
                         <img class="hot-img" src="../../assets/hot.gif" alt="">
-                        <span class="van-cell-text">圣诞活动</span>
+                        <span class="van-cell-text">喜迎双旦</span>
                     </template>
                     <span class="active-slot">限时优惠</span>
                 </van-cell>

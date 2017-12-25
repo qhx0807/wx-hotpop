@@ -1,17 +1,17 @@
 <template>
   <div class="act">
-    <!-- <img class="hedimg" src="../../assets/act1.png" alt=""> -->
+    <img class="hedimg" src="../../assets/ac1.jpg" alt="">
+    <img class="hedimg" src="../../assets/ac2.jpg" alt="">
   </div>
 </template>
 
 <script>
 import wx from 'weixin-js-sdk'
 import sha1 from 'js-sha1'
+import { postApi } from '../../axios'
 export default {
     data () {
         return {
-            codeUrl:'http://qrcode.shuogesha.com/qrcode?pixel=270_250&content=',
-            qrcodeCon:'http://huoguo.cqjft.com/share/new-share.html?fatherid=',
             fatherid:'',
         }
     },
@@ -20,8 +20,8 @@ export default {
     },
      activated(){
         this.fatherid = localStorage.openid
-        this.qrcodeCon = 'http://huoguo.cqjft.com/share/new-share.html?fatherid='+ localStorage.openid
         this.wxConfigFoo()
+        this.clickShare()
     },
     methods: {
         wxConfigFoo(){
@@ -42,10 +42,11 @@ export default {
 			})
 
 			wx.ready(function(){
+                let faid = localStorage.openid
 				wx.onMenuShareTimeline({
 					title: "圣诞元旦，惊喜不断！",
 					desc:"随时随地，和你品尝舌尖上的重庆！",
-					link: 'http://huoguo.cqjft.com/share/new-share.html?r=groupid_4DE30F20-A4A8-46A3-85BC-7AE28FCD29CF',
+					link: 'http://huoguo.cqjft.com/share/share-act.html?r=ACT&actid=4DE30F20-A4A8-46A3-85BC-7AE28FCD29CF&faid='+faid,
 					imgUrl: 'http://huoguo.cqjft.com/images/shareimg.bmp', 
 					success: function () { 
 						alert("分享成功！");
@@ -57,7 +58,7 @@ export default {
 				wx.onMenuShareAppMessage({
 					title: "圣诞元旦，惊喜不断！",
 					desc:"随时随地，和你品尝舌尖上的重庆！",
-					link: 'http://huoguo.cqjft.com/share/new-share.html?r=groupid_4DE30F20-A4A8-46A3-85BC-7AE28FCD29CF',
+					link: 'http://huoguo.cqjft.com/share/share-act.html?r=ACT&actid=4DE30F20-A4A8-46A3-85BC-7AE28FCD29CF&faid='+faid,
 					imgUrl: 'http://huoguo.cqjft.com/images/shareimg.bmp', 
 					success: function () { 
 						alert("分享成功！");
@@ -68,7 +69,26 @@ export default {
 				})
 
 			})
-		},
+        },
+        clickShare(){
+            let faid = sessionStorage.getItem('faid')
+            let actid = sessionStorage.getItem('actid')
+            let d = {
+				Type:'ClickShare',
+				OpenID: localStorage.openid,
+                ShareOpenID: faid || '',
+                ActivityID:'4DE30F20-A4A8-46A3-85BC-7AE28FCD29CF',
+			}
+            if(faid && actid){
+                postApi(d, function(response){
+					console.log(response)
+					
+				}.bind(this),
+				function(error){
+					console.log(error)
+				}.bind(this))
+            }
+        }
     }
 
 }
