@@ -82,7 +82,8 @@ export default {
             if(faid && actid){
                 postApi(d, function(response){
 					console.log(response)
-					
+					sessionStorage.removeItem('faid')
+					sessionStorage.removeItem('actid')
 				}.bind(this),
 				function(error){
 					console.log(error)
