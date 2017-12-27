@@ -81,7 +81,7 @@
                         <span class="van-cell-text">我的优惠券</span>
                     </template>
                 </van-cell> -->
-                
+
                 <van-cell title="收货地址" @click.native="goMenu('addr')" icon="location" is-link></van-cell>
             </van-cell-group>
 
@@ -89,7 +89,7 @@
                 <van-cell title="留言反馈" @click.native="goMenu('memo')"  icon="chat" is-link></van-cell>
             </van-cell-group>
         </div>
-        
+
         <van-tabbar v-model="active">
             <van-tabbar-item icon="shop" @click.native="goList">热销商品</van-tabbar-item>
             <van-tabbar-item icon="contact">个人中心</van-tabbar-item>
@@ -113,17 +113,17 @@ export default {
             userData:{},
             step:0,
             lines:[
-                "rgba(255,65,1, 0.6)", 
+                "rgba(255,65,1, 0.6)",
                 "rgba(255,65,1, 0.4)",
-                "rgba(255,65,1, 0.1)", 
+                "rgba(255,65,1, 0.1)",
             ],
-            
+
         }
     },
     created(){
         Toast.loading({
             duration: 0,
-            forbidClick: true, 
+            forbidClick: true,
         })
         this.getUserInfo()
         this.getTokenTicket()
@@ -132,14 +132,14 @@ export default {
         this.loop()
         this.active = 1
         this.getOrderList()
-        
+
     },
     deactivated(){
     },
     watch:{
        "$route":function(to, from){
-           
-        } 
+
+        }
     },
     mounted(){
 		// const wrapper = document.querySelector('.my')
@@ -164,7 +164,7 @@ export default {
                 }
             })
             return num
-            
+
         },
         alreadyPay(){
             let num = 0
@@ -217,7 +217,7 @@ export default {
                     this.userData = response.data
                    // localStorage.setItem("HeadImages", response.data.HeadImages)
                 }.bind(this),function (error) {
-                
+
                 }.bind(this))
         },
         goMenu(e){
@@ -282,27 +282,27 @@ export default {
 			var ctx = canvas.getContext('2d')
 			var boHeight = canvas.height / 6
 			var posHeight = canvas.height / 1.8
-			ctx.clearRect(0,0,canvas.width,canvas.height); 
+			ctx.clearRect(0,0,canvas.width,canvas.height);
 			var t = this;
 			this.step ++
-			for(var j = t.lines.length - 1; j >= 0; j--) { 
-				ctx.fillStyle = t.lines[j]; 
-				//每个矩形的角度都不同，每个之间相差45度 
-				var angle = (t.step+j*70)*Math.PI/180; 
+			for(var j = t.lines.length - 1; j >= 0; j--) {
+				ctx.fillStyle = t.lines[j];
+				//每个矩形的角度都不同，每个之间相差45度
+				var angle = (t.step+j*70)*Math.PI/180;
 				var deltaHeight = Math.sin(angle) * boHeight;
-				var deltaHeightRight = Math.cos(angle) * boHeight; 
+				var deltaHeightRight = Math.cos(angle) * boHeight;
 				ctx.beginPath();
-				ctx.moveTo(0, posHeight+deltaHeight); 
-				ctx.bezierCurveTo(canvas.width/2, posHeight+deltaHeight-boHeight, canvas.width / 2, posHeight+deltaHeightRight-boHeight, canvas.width, posHeight+deltaHeightRight); 
-				ctx.lineTo(canvas.width, canvas.height); 
-				ctx.lineTo(0, canvas.height); 
-				ctx.lineTo(0, posHeight+deltaHeight); 
-				ctx.closePath(); 
-				ctx.fill(); 
+				ctx.moveTo(0, posHeight+deltaHeight);
+				ctx.bezierCurveTo(canvas.width/2, posHeight+deltaHeight-boHeight, canvas.width / 2, posHeight+deltaHeightRight-boHeight, canvas.width, posHeight+deltaHeightRight);
+				ctx.lineTo(canvas.width, canvas.height);
+				ctx.lineTo(0, canvas.height);
+				ctx.lineTo(0, posHeight+deltaHeight);
+				ctx.closePath();
+				ctx.fill();
 			}
-			var requestAnimFrame = 	window.requestAnimationFrame  || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || function( callback ){ 
-						window.setTimeout(callback, 1000 / 60); 
-					}; 
+			var requestAnimFrame = 	window.requestAnimationFrame  || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || function( callback ){
+						window.setTimeout(callback, 1000 / 60);
+					};
 			requestAnimFrame(this.loop);
         },
 
@@ -400,7 +400,7 @@ export default {
         .test{
             color: rgba(0,168,255, 0.6);
             color:  rgba(0,168,255, 0.4);
-            color:  orangered 
+            color:  orangered
         }
         .hot-img{
             vertical-align: middle;

@@ -16,7 +16,7 @@ export default {
         }
     },
     created () {
-        
+
     },
      activated(){
         this.fatherid = localStorage.openid
@@ -29,11 +29,11 @@ export default {
 			let timestamp = new Date().getTime().toString()
 			let url = window.location.href.split('#')[0]
 			let noncestr = "Wm3WZYTPz0wzccnW"
-			
+
 			let str = "jsapi_ticket="+ticket+"&noncestr="+noncestr+"&timestamp="+timestamp+"&url="+url;
 			let signature = sha1(str)
 			wx.config({
-				debug: false, 
+				debug: false,
 				appId: 'wx3a1714f5b4c11978',
 				timestamp: timestamp,
 				nonceStr: noncestr,
@@ -47,8 +47,8 @@ export default {
 					title: "圣诞元旦，惊喜不断！",
 					desc:"随时随地，和你品尝舌尖上的重庆！",
 					link: 'http://huoguo.cqjft.com/share/share-act.html?r=ACT&actid=4DE30F20-A4A8-46A3-85BC-7AE28FCD29CF&faid='+faid,
-					imgUrl: 'http://huoguo.cqjft.com/images/shareimg.bmp', 
-					success: function () { 
+					imgUrl: 'http://huoguo.cqjft.com/images/shareimg.bmp',
+					success: function () {
 						alert("分享成功！");
 					},
 					cancel: function () {
@@ -59,8 +59,8 @@ export default {
 					title: "圣诞元旦，惊喜不断！",
 					desc:"随时随地，和你品尝舌尖上的重庆！",
 					link: 'http://huoguo.cqjft.com/share/share-act.html?r=ACT&actid=4DE30F20-A4A8-46A3-85BC-7AE28FCD29CF&faid='+faid,
-					imgUrl: 'http://huoguo.cqjft.com/images/shareimg.bmp', 
-					success: function () { 
+					imgUrl: 'http://huoguo.cqjft.com/images/shareimg.bmp',
+					success: function () {
 						alert("分享成功！");
 					},
 					cancel: function () {
