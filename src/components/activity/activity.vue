@@ -42,10 +42,13 @@ export default {
 			})
 
 			wx.ready(function(){
+
+				let faid = localStorage.openid
+
 				wx.onMenuShareTimeline({
 					title: "钱的事你不用担心",
 					desc:"关注公众号，免费吃火锅",
-					link: 'http://huoguo.cqjft.com/share/new-share.html?r=groupid_4DE30F20-A4A8-46A3-85BC-7AE28FCD29CF',
+					link: 'http://huoguo.cqjft.com/share/share-act.html?r=ACT&actid=4DE30F20-A4A8-46A3-85BC-7AE28FCD29CF&faid='+faid,
 					imgUrl: 'http://huoguo.cqjft.com/images/shareimg.bmp',
 					success: function () {
 						alert("分享成功！");
@@ -57,7 +60,7 @@ export default {
 				wx.onMenuShareAppMessage({
 					title: "钱的事你不用担心",
 					desc:"关注公众号，免费吃火锅",
-					link: 'http://huoguo.cqjft.com/share/new-share.html?r=groupid_4DE30F20-A4A8-46A3-85BC-7AE28FCD29CF',
+					link: 'http://huoguo.cqjft.com/share/share-act.html?r=ACT&actid=4DE30F20-A4A8-46A3-85BC-7AE28FCD29CF&faid='+faid,
 					imgUrl: 'http://huoguo.cqjft.com/images/shareimg.bmp',
 					success: function () {
 						alert("分享成功！");
