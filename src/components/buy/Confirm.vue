@@ -23,7 +23,7 @@
 				<div class="send-fs">
 					<h4>{{psFs}}</h4>
 					<p>普通快递</p>
-				</div>	
+				</div>
 			</van-cell>
 		</van-cell-group>
 		<van-cell-group style="margin:10px 0;">
@@ -46,7 +46,7 @@
 			</ul>
 		</div>
 		<van-submit-bar :loading="isLoading" :price="totalPrice" button-text="提交订单" :tip="tips" @submit="onClickAddOrder" />
-		
+
 	</div>
 </template>
 
@@ -70,7 +70,7 @@ export default {
 		};
 	},
 	created() {
-		
+
 	},
 	activated(){
         if(this.carList.length==0){
@@ -80,13 +80,13 @@ export default {
 		}
 		Toast.loading({
             duration: 0,
-            forbidClick: true, 
+            forbidClick: true,
 		})
 		this.getUserInfo()
 		this.getOrderPrice()
     },
 	watch:{
-		
+
 	},
 	computed: {
 		...mapState([
@@ -144,7 +144,7 @@ export default {
 					})
 					this.addrInfo = response.data
                 }.bind(this),function (error) {
-                
+
                 }.bind(this))
         },
 		goEditAddr(){

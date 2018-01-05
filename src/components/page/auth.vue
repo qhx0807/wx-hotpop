@@ -107,6 +107,8 @@ export default {
 				this.$router.replace({name:'popucenter'})
 			}else if(str == 'LIST'){
 				this.$router.replace({name:'list', params:{id: 'c6f8751a-8d69-4ab4-bdf6-620b5f90ec6b'}})
+			}else if(str == 'ACT'){
+				this.$router.replace({name:'activiity'})
 			}else{
 				this.$router.replace({name: 'my'})
 			}

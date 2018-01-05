@@ -14,7 +14,7 @@ export default {
     name: "sharepopu",
     data() {
         return {
-            codeUrl:'http://qrcode.shuogesha.com/qrcode?pixel=270_250&content=',
+            codeUrl:'http://pan.baidu.com/share/qrcode?w=270&h=250&url=',
             qrcodeCon:'http://huoguo.cqjft.com/share/new-share.html?fatherid=',
             fatherid:'',
         }
