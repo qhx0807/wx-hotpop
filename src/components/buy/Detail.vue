@@ -45,7 +45,7 @@
                     <img v-for="(item, index) in conImgs" :key="index" :src="item" alt="">
                 </div>
             </div>
-            
+
         </div>
     </div>
 </template>
@@ -53,6 +53,8 @@
 <script>
 import { Toast } from 'vant'
 import { mapState } from 'vuex'
+import wx from 'weixin-js-sdk'
+import sha1 from 'js-sha1'
 // import BScroll from 'better-scroll'
 export default {
     name: "detail",
@@ -61,7 +63,8 @@ export default {
             host:'http://huoguo.cqjft.com',
             homeImgs:[],
             conImgs:[],
-            isHeadShow:false,
+			isHeadShow:false,
+			sortUrl:'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx3a1714f5b4c11978&redirect_uri=http://huoguo.cqjft.com/new.html&response_type=code&scope=snsapi_base&state=SORT&connect_redirect=1#wechat_redirect',
         }
     },
     created(){
@@ -88,13 +91,14 @@ export default {
 		// })
     },
     deactivated(){
-        
+
     },
     watch: {
-        
+
     },
     mounted(){
 		this.watchScroll()
+		this.wxConfigFoo()
 	},
     computed:{
         ...mapState([
@@ -124,7 +128,54 @@ export default {
             }else{
                  this.isHeadShow = false
             }
-        }
+		},
+		wxConfigFoo(){
+			let ticket = localStorage.ticket
+			let timestamp = new Date().getTime().toString()
+			let url = window.location.href.split('#')[0]
+			let noncestr = "Wm3WZYTPz0wzccnW"
+
+			let str = "jsapi_ticket="+ticket+"&noncestr="+noncestr+"&timestamp="+timestamp+"&url="+url;
+			let signature = sha1(str)
+			wx.config({
+				debug: false,
+				appId: 'wx3a1714f5b4c11978',
+				timestamp: timestamp,
+				nonceStr: noncestr,
+				signature: signature,
+				jsApiList: ['onMenuShareTimeline','onMenuShareAppMessage'],
+			})
+
+			wx.ready(function(){
+				wx.onMenuShareTimeline({
+					title: "杨家酱小火锅",
+					desc:"随时随地，和你品尝舌尖上的重庆！",
+					link: 'http://huoguo.cqjft.com/new-share.html?r=SORT',
+					imgUrl: 'http://huoguo.cqjft.com/images/shareimg.bmp',
+					success: function () {
+						//getInfo('Type','ShareRecord','ActivityID',GetActivity.ActivityID);
+						alert("分享成功！");
+					},
+					cancel: function () {
+					// alert("取消")
+					}
+				})
+				wx.onMenuShareAppMessage({
+					title: "杨家酱小火锅",
+					desc:"随时随地，和你品尝舌尖上的重庆！",
+					link: 'http://huoguo.cqjft.com/new-share.html?r=SORT',
+					imgUrl: 'http://huoguo.cqjft.com/images/shareimg.bmp',
+					success: function () {
+						//getInfo('Type','ShareRecord','ActivityID',GetActivity.ActivityID);
+						alert("分享成功！");
+					},
+					cancel: function () {
+					// alert("取消")
+					}
+				})
+
+			})
+		},
     },
 };
 </script>
@@ -133,7 +184,7 @@ export default {
 .detail{
     height: 100%;
 	overflow: auto;
-    
+
 }
 .detail-head{
     height: 45px;
